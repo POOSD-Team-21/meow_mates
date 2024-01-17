@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Manager</title>
+  <script defer src="./js/login.js"></script>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="flex h-screen antialiased">
+  <div class="hidden flex-1 md:block bg-zinc-900 text-white relative">
+    <div class="absolute left-8 top-8 text-lg">@PurrContacts</div>
+  </div>
+  <div class="flex-1 flex flex-col items-center justify-center relative">
+    <button class="absolute top-8 right-8 font-semibold">Sign Up</button>
+    <h1 class="font-semibold text-2xl mb-2 text-center">Log into your account</h1>
+    <p class="text-center mb-6 text-zinc-500">Enter your username and password</p>
+    <form id="login-form" class="w-[350px] mx-auto flex flex-col gap-2">
+      <div class="flex flex-col">
+        <input class="px-3 py-1 rounded-md border shadow-sm placeholder:text-sm" id="username" name="username" placeholder="username" type="text">
+      </div class="flex flex-col">
+      <div class="flex flex-col">
+        <input class="px-3 py-1 rounded-md border shadow-sm placeholder:text-sm" is="password" name="password" placeholder="password" type="password">
+      </div>
+      <button class="bg-zinc-900 px-4 py-2 rounded-md text-white mt-2 font-semibold" type="submit">Sign In</button>
+    </form>
+  </div>
+</body>
+</html>
