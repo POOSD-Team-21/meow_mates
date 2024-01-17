@@ -1,6 +1,6 @@
-const loginForm = document.querySelector("#login-form");
+const loginForm = document.querySelector('#login-form');
 
-loginForm.addEventListener("submit", async (e) => {
+loginForm.addEventListener('submit', async (e) => {
   // Prevent the default form submission behavior
   e.preventDefault();
 
@@ -11,7 +11,7 @@ loginForm.addEventListener("submit", async (e) => {
     await loginUser(user);
 
     // Redirect to the dashboard
-    window.location.href = "/dashboard";
+    window.location.href = '/dashboard';
   } catch (error) {
     // TODO: notify user of error
   }
@@ -19,5 +19,5 @@ loginForm.addEventListener("submit", async (e) => {
 
 // TODO: implement loginUser function
 async function loginUser(user) {
-  throw new Error("Not implemented");
+  throw new Error('Not implemented');
 }
