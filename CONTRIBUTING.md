@@ -36,6 +36,14 @@ git checkout -b project-name/feature-name
 
 Although its not a big deal if you break any of these conventions, it helps to all be on the same page following the same set of rules.
 
+## First Steps
+
+Create an issue first. This lets people know what you are working on (assign yourself to the issue), they can see what branches are linked to the issue, and what it is you accomplished. 
+
+This issue does not have to be an issue like a bug, but it can be a feature, bugs, or anything you are adding to the project in your code. It should be kept somewhat small and specific but not the the point of it being just one commit.
+
+Make sure you have a good title and description of the feature or issue you are working on. For example, issue #3 is the one in regards to creating this contribution document. There I had a title saying what needs to be done, and then describe why and how it can be done. 
+
 ## Branch names
 
 - Names should begin with the project name followed by a feature description
@@ -60,4 +68,8 @@ Although its not a big deal if you break any of these conventions, it helps to a
 
 ## Code review
 
-Ideally, we should all be thoroughly reviewing each other’s code, but since this a fairly small project, its okay to approve changes aren’t ideally or may break things since we can’t quickly fix issues later on.
+Ideally, we should all be thoroughly reviewing each other’s code, but since this a fairly small project, its okay to approve changes aren’t ideally or may break things since we can quickly fix issues later on.
+
+## After Code Review
+
+If you had any requested changes fix them. Then you are free to push but it does not hurt to get another look over based on the changes. Once you push merge the branch into main, or if it was accepted your changes are now on the main branch to be used and viewed.
