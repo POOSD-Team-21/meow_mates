@@ -46,10 +46,12 @@ Make sure you have a good title and description of the feature or issue you are 
 
 ## Branch names
 
-- Names should begin with the project name followed by a feature description
-    - A good example is `api/implement-authentication`
+Once you have the issue created you can click create a branch on github and it will create the branch and link it to the issue for you (you can also use the command line as well, but it won't auto link).
+
+- Names should be in the following format like below where # is the number of the issue
+    - A good example is `issue/#-implement-authentication`
 - Use lowercase
-- Use hyphens to seperate words
+- Use hyphens to separate words
 - Keep it short and meaningful
 
 ## Commits
