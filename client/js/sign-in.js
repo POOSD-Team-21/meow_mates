@@ -6,9 +6,11 @@ signInForm.addEventListener('submit', async (e) => {
 
   // Grab field values from the form
   const user = Object.fromEntries(new FormData(signInForm));
+  console.log(user);
+
   try {
-    // Attempt to login the user
-    await loginUser(user);
+    // Attempt to sign in the user
+    await signInUser(user);
 
     // Redirect to the dashboard
     window.location.href = '/dashboard';
@@ -17,7 +19,7 @@ signInForm.addEventListener('submit', async (e) => {
   }
 });
 
-// TODO: implement loginUser function
-async function loginUser(user) {
+// TODO: implement
+async function signInUser(user) {
   throw new Error('Not implemented');
 }
