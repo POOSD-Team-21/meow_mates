@@ -38,18 +38,18 @@ Although its not a big deal if you break any of these conventions, it helps to a
 
 ## First Steps
 
-Create an issue first. This lets people know what you are working on (assign yourself to the issue), they can see what branches are linked to the issue, and what it is you accomplished. 
+Create an issue first. This lets people know what you are working on (assign yourself to the issue), they can see what branches are linked to the issue, and what it is you accomplished.
 
 This issue does not have to be an issue like a bug, but it can be a feature, bugs, or anything you are adding to the project in your code. It should be kept somewhat small and specific but not the the point of it being just one commit.
 
-Make sure you have a good title and description of the feature or issue you are working on. For example, issue #3 is the one in regards to creating this contribution document. There I had a title saying what needs to be done, and then describe why and how it can be done. 
+Make sure you have a good title and description of the feature or issue you are working on. For example, issue #3 is the one in regards to creating this contribution document. There I had a title saying what needs to be done, and then describe why and how it can be done.
 
 ## Branch names
 
 Once you have the issue created you can click create a branch on github and it will create the branch and link it to the issue for you (you can also use the command line as well, but it won't auto link).
 
 - Names should be in the following format like below where # is the number of the issue
-    - A good example is `issue/#-implement-authentication`
+  - A good example is `issue/#-implement-authentication`
 - Use lowercase
 - Use hyphens to separate words
 - Keep it short and meaningful
