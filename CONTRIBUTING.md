@@ -1,38 +1,78 @@
+# Contributing
+
 Here are some general guidelines you should know before making your first contribution to the project.
 
-# About this repository
+## About this repository
 
 This repository is a monorepo, meaning multiple projects live under this single repository. Since this is fairly small project, there are only two areas in the repo you should be concerned about: the `api` and `client` folder.
 
-## API
+### IMPORTANT NOTE
+
+Although our project is using node.js, this is **NOT** a node.js project. We are using node.js only for package management and to run our scripts to help facilitate development. Our project uses the LAMP stack: Linux, Apache, MySQL, and PHP.
+
+### API
 
 The `api` folder should contain all the business and server-side logic of our application. This is also where we will be making calls to our database.
 
-## Client
+### Client
 
 The `client` folder should all the client-side logic for our application. This will be all our HTML, CSS, JavaScript files, and any other static assets we may need.
 
-# Setting up your development environment
+## Tooling
 
-## Clone the repository
+To help facilitate development, we are using [pnpm](https://pnpm.io/) as our package manager, [Prettier](https://prettier.io/) as our code formatter, and [Tailwind CSS](https://tailwindcss.com/) to generate our CSS.
+
+### Installing pnpm
+
+If you have npm installed, you can install pnpm globally by running the following command:
+
+```bash
+npm install -g pnpm
+```
+
+If you don't have npm, you can install it by installing node.js [here](https://nodejs.org/en/download/).
+
+You could also install pnpm through these [other methods](https://pnpm.io/installation).
+
+### Using Tailwind
+
+When using Tailwind, make sure you to run the following command:
+
+```bash
+pnpm tailwind:watch
+```
+
+This will actively scan changes in class names in your HTML and generate an optimized CSS file for you to use.
+
+You can also run the following command to do this once:
+
+```bash
+pnpm tailwind:build
+```
+
+## Development
+
+### Clone the repository
 
 ```bash
 git clone https://github.com/POOSD-Team-21/contact_manager.git
 ```
 
-## Navigate to the project directory
+### Navigate to the project directory
 
 ```bash
 cd contact_manager
 ```
 
-## Create a branch off main
+### Create a branch off main
 
 ```bash
-git checkout -b project-name/feature-name
+git checkout -b <branch-name>
 ```
 
-# Conventions
+```
+
+## Conventions
 
 Although its not a big deal if you break any of these conventions, it helps to all be on the same page following the same set of rules.
 
@@ -70,8 +110,12 @@ Once you have the issue created you can click create a branch on github and it w
 
 ## Code review
 
-Ideally, we should all be thoroughly reviewing each other’s code, but since this a fairly small project, its okay to approve changes aren’t ideally or may break things since we can quickly fix issues later on.
+Ideally, we should all be thoroughly reviewing each other’s code, but since this a fairly small project, its okay to approve changes that aren’t ideally or may break things since we can quickly fix issues later on.
 
-## After Code Review
+If you had any requested changes, please resolve them. Afterwards, you are free to merge your pull request. Make sure to double check your changes before merging. Once your pull request is merged, make sure to delete the branch and pull the latest changes from main on your machine.
 
-If you had any requested changes fix them. Then you are free to push but it does not hurt to get another look over based on the changes. Once you push merge the branch into main, or if it was accepted your changes are now on the main branch to be used and viewed.
+```
+
+```
+
+```
