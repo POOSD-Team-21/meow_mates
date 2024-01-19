@@ -4,8 +4,8 @@
   "scripts": {
     "format": "prettier . --check",
     "format:fix": "prettier . --write",
-    "tailwind:watch": "tailwindcss -i ./css/styles.css -o ./css/tailwind.css --watch --minify",
-    "tailwind:build": "tailwindcss -i ./css/styles.css -o ./css/tailwind.css --minify"
+    "tailwind:watch": "tailwindcss -i ./client/css/styles.css -o ./client/css/client/tailwind.css --watch --minify",
+    "tailwind:build": "tailwindcss -i ./client/css/styles.css -o ./client/css/.tailwind.css --minify"
   },
   "license": "MIT",
   "devDependencies": {
