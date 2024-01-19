@@ -1,11 +1,11 @@
-const loginForm = document.querySelector('#login-form');
+const signInForm = document.querySelector('#sign-in-form');
 
-loginForm.addEventListener('submit', async (e) => {
+signInForm.addEventListener('submit', async (e) => {
   // Prevent the default form submission behavior
   e.preventDefault();
 
   // Grab field values from the form
-  const user = Object.fromEntries(new FormData(loginForm));
+  const user = Object.fromEntries(new FormData(signInForm));
   try {
     // Attempt to login the user
     await loginUser(user);
