@@ -1,0 +1,25 @@
+name: Deploy
+
+on:
+  push:
+    branches: ['main']
+    paths:
+      - 'src/**'
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+        env:
+          KEY: ${{ secrets.KEY }}
+
+      - shell: bash
+        run: scp -r src/* ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/html
