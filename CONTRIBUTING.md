@@ -4,7 +4,7 @@ Here are some general guidelines you should know before making your first contri
 
 ## About this repository
 
-This repository is our implementation of the Contact Manager project for Richard Leinecker's POOSD class. This project is a LAMP stack application that allows users to manage pets in a pet shelter or hospital.
+This repository is our implementation of the Contact Manager project for Richard Leinecker's POOSD class. It is a LAMP stack application that allows users to manage pets in a pet shelter or hospital.
 
 ### IMPORTANT NOTE
 
@@ -25,6 +25,34 @@ npm install -g pnpm
 If you don't have npm, you can install it by installing node.js [here](https://nodejs.org/en/download/).
 
 You could also install pnpm through these [other methods](https://pnpm.io/installation).
+
+### Tailwind CSS
+
+This project uses the Tailwind CSS CLI to generate our CSS. To run the Tailwind CLI on its own, you can run the following command:
+
+```bash
+pnpm run tailwind
+```
+
+If you want to active watch for class changes, you can run the following command:
+
+```bash
+pnpm run tailwind:watch
+```
+
+## Prettier
+
+Prettier is a code formatter that helps keep our code consistent. To check if your code is formatted correctly, you can run the following command:
+
+```bash
+pnpm run format:check
+```
+
+If you want to format your code, you can run the following command:
+
+```bash
+pnpm run format:fix
+```
 
 ## Development
 
