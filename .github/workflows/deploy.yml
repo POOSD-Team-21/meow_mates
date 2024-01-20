@@ -1,10 +1,11 @@
 name: Deploy
 
 on:
-  push:
+  workflow_run:
+    workflows: ['CI']
     branches: ['main']
-    paths:
-      - 'src/**'
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -13,13 +14,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-        env:
-          KEY: ${{ secrets.KEY }}
-
-      - shell: bash
-        run: scp -r src/* ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/var/www/html
+      - name: Copy files
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          rm: true
+          timeout: 120
+          source: src/*
+          strip_components: 1
+          target: /var/www/html
