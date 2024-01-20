@@ -21,7 +21,6 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           rm: true
-          timeout: 120
           source: src/*
           strip_components: 1
           target: /var/www/html
