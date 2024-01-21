@@ -25,7 +25,7 @@ jobs:
           chmod 700 ~/.ssh
           ssh-keyscan $HOST >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-          scp -r src/* src/.* root@$HOST:/var/www/html
+          scp -r ./src/* ./src/.*  root@159.203.142.63:/var/www/html
         env:
           KEY: ${{ secrets.KEY }}
           HOST: ${{ secrets.HOST }}
