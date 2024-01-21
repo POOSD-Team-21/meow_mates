@@ -1,8 +1,10 @@
+# must enable rewrite to work via a2enmod rewirte command
 RewriteEngine on
 
 # removes .html from url names
-RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
-RewriteRule ^ /%1 [NC,L,R]
+# redirect /file.html to /file
+RewriteRule ^(.+).html$ /$1 [L,R]
 
+# now we will internally map /file to /file.html
 RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^ %{REQUEST_URI}.html [NC,L]
+RewriteRule ^(.*)/?$ /$1.html [END]
