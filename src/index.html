@@ -12,7 +12,74 @@
     <link rel="manifest" href="assets/favicon/site.webmanifest" />
   </head>
   <body>
-    <nav></nav>
-    <p>Hello, World! Welcome to Meow Mates</p>
+    <div class="flex min-h-screen flex-col antialiased">
+      <header class="my-4 flex items-center justify-between gap-4 px-10">
+        <a class="whitespace-nowrap font-semibold" href="/">Meow Mates</a>
+        <nav>
+          <a
+            class="flex whitespace-nowrap rounded-md bg-zinc-900 px-4 py-2 font-semibold text-white shadow-sm"
+            href="/sign-in.html"
+            >Sign In</a
+          >
+        </nav>
+      </header>
+      <main class="mb-16 mt-16 flex flex-1 flex-col justify-center px-8">
+        <section class="mb-16 flex flex-col justify-between text-center md:text-left">
+          <h1 class="mb-2 text-4xl font-semibold md:text-5xl">Meow Mates</h1>
+          <h2 class="mx-auto mb-4 max-w-96 text-xl md:mx-0 md:max-w-none md:text-2xl">
+            Comprehensive Care Management for Pet Hospitals & Shelters
+          </h2>
+          <div class="mx-auto flex gap-2 md:mx-0">
+            <button class="flex whitespace-nowrap rounded-md bg-zinc-900 px-4 py-2 font-semibold text-white shadow-sm">
+              Go to Dashboard
+            </button>
+            <button
+              class="flex whitespace-nowrap rounded-md border border-zinc-900 bg-white px-4 py-2 font-semibold text-zinc-900 shadow-sm"
+            >
+              Sign Up
+            </button>
+          </div>
+        </section>
+        <section class="grid grid-cols-1 gap-4 md:grid-cols-2 md:flex-row lg:grid-cols-4">
+          <div class="rounded bg-zinc-100 p-6">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded bg-zinc-200 text-2xl">🐱</div>
+            <h1 class="mb-2 font-semibold">Simple</h1>
+            <p>
+              Effortlessly manage pet records, appointments, and treatments with our intuitive interface designed for
+              busy shelters and clinics.
+            </p>
+          </div>
+          <div class="rounded bg-zinc-100 p-6">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded bg-zinc-200 text-2xl">🐶</div>
+            <h1 class="mb-2 font-semibold">Completely Free</h1>
+            <p>
+              Get started without any costs - ideal for non-profit organizations and small clinics looking to streamline
+              their operations.
+            </p>
+          </div>
+          <div class="rounded bg-zinc-100 p-6">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded bg-zinc-200 text-2xl">🦎</div>
+            <h1 class="mb-2 font-semibold">Hundreds of Users</h1>
+            <p>
+              Join a growing community of veterinarians and shelter workers who trust Meow Mates for reliable pet
+              management.
+            </p>
+          </div>
+          <div class="rounded bg-zinc-100 p-6">
+            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded bg-zinc-200 text-2xl">🦜</div>
+            <h1 class="mb-2 font-semibold">Lorem ipsum dolor</h1>
+            <p>
+              Monitor health records, vaccination dates, and adoption statuses all in one place - because every pet
+              deserves meticulous care.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="border-t py-8 text-center text-sm text-zinc-500">
+      <p class="font-medium">Released under the MIT License</p>
+      <p class="font-medium">Copyright © 2022-present Meow Mates</p>
+    </footer>
   </body>
 </html>
