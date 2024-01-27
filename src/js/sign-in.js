@@ -1,4 +1,8 @@
 const signInForm = document.querySelector('#sign-in-form');
+const loggedInFail = document.querySelector('#incorrect-login-error');
+
+// initially hides error message
+loggedInFail.style.display = 'none';
 
 signInForm.addEventListener('submit', async (e) => {
   // Prevent the default form submission behavior
@@ -10,6 +14,8 @@ signInForm.addEventListener('submit', async (e) => {
   const data = await signInUser(user);
   if (data.error) {
     console.log(data.error);
+    // shows error message
+    loggedInFail.style.display = 'block';
     return;
   }
 
