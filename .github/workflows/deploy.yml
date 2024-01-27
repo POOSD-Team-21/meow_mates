@@ -21,7 +21,7 @@ jobs:
           chmod 700 ~/.ssh
           ssh-keyscan $HOST >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
-          rsync -avz --delete ./src/ ${{ secrets.USERNAME}}@${{secrets.HOST}}:/var/www/html
+          rsync -avz --exclude=.env --delete ./src/ ${{ secrets.USERNAME}}@${{secrets.HOST}}:/var/www/html
         env:
           KEY: ${{ secrets.KEY }}
           HOST: ${{ secrets.HOST }}
