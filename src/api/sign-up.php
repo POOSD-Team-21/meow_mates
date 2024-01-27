@@ -43,3 +43,4 @@ function send_json($object)
     header('Content-type: application/json');
     echo $object;
 }
+?>
