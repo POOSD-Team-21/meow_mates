@@ -6,20 +6,25 @@ signInForm.addEventListener('submit', async (e) => {
 
   // Grab field values from the form
   const user = Object.fromEntries(new FormData(signInForm));
-  console.log(user);
 
-  try {
-    // Attempt to sign in the user
-    await signInUser(user);
-
-    // Redirect to the dashboard
-    window.location.href = '/dashboard';
-  } catch (error) {
-    // TODO: notify user of error
+  const data = await signInUser(user);
+  if (data.error) {
+    console.log(data.error);
+    return;
   }
+
+  localStorage.setItem('user', JSON.stringify(data.user));
+
+  // Redirect to the dashboard
+  window.location.href = '/dashboard.html';
 });
 
 // TODO: implement
 async function signInUser(user) {
-  throw new Error('Not implemented');
+  const res = await fetch('/api/sign-in.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  });
+  return res.json();
 }
