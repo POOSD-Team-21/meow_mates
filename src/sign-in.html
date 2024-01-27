@@ -13,17 +13,20 @@
     <link rel="manifest" href="assets/favicon/site.webmanifest" />
   </head>
   <body class="flex h-screen antialiased">
-    <div class="relative hidden flex-1 bg-zinc-900 text-white md:block">
-      <a href="/" class="absolute left-8 top-8 text-lg">Meow Mates</a>
+    <div class="relative hidden flex-1 bg-zinc-900 text-white md:block bg-main-text-color">
+      <!-- Aesthetic Section -->
+      <a href="/" class="absolute left-8 top-8 text-lg text-[#FFFFFF] hover:underline focus:underline">Meow Mates</a>
     </div>
-    <div class="relative flex flex-1 flex-col items-center justify-center">
-      <a href="./sign-up.html" class="absolute right-8 top-8 font-semibold">Sign Up</a>
+    <div class="relative flex flex-1 flex-col items-center justify-center bg-main-background-color text-main-text-color border-main-text-color">
+      <a href="./sign-up.html" class="absolute right-8 top-8 font-semibold rounded-md bg-zinc-900 px-4 py-2 text-white shadow-sm text-[#FFFFFF] bg-main-text-color hover:underline hover:shadow-lg transition duration-300 focus:ring-2 focus:ring-offset-2 focus:underline focus:ring-main-text-color">Sign Up</a>
+      
+      <!-- Login Section -->
       <h1 class="mb-2 text-center text-2xl font-semibold">Log into your account</h1>
-      <p class="mb-6 text-center text-zinc-500">Enter your username and password</p>
+      <p class="mb-6 text-center text-main-text-color">Enter your username and password</p>
       <form id="sign-in-form" class="mx-auto flex w-[350px] flex-col gap-2">
         <div class="flex flex-col">
           <input
-            class="rounded-md border px-3 py-1 shadow-sm placeholder:text-sm"
+            class="rounded-md border-2 px-3 py-1 shadow-sm placeholder:text-sm"
             id="username"
             name="login"
             placeholder="username"
@@ -32,14 +35,14 @@
         </div>
         <div class="flex flex-col">
           <input
-            class="rounded-md border px-3 py-1 shadow-sm placeholder:text-sm"
+            class="rounded-md border-2 px-3 py-1 shadow-sm placeholder:text-sm"
             is="password"
             name="password"
             placeholder="password"
             type="password"
           />
         </div>
-        <button class="mt-2 rounded-md bg-zinc-900 px-4 py-2 font-semibold text-white shadow-sm" type="submit">
+        <button class="mt-2 rounded-md bg-zinc-900 px-4 py-2 font-semibold shadow-sm text-[#FFFFFF] bg-main-text-color hover:underline hover:shadow-lg transition duration-300 focus:ring-2 focus:ring-offset-2 focus:underline focus:ring-main-text-color" type="submit">
           Sign In
         </button>
       </form>
