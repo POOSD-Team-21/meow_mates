@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../.env';
 $body = get_request_body();
 
 $first = $body['first'];
@@ -8,10 +9,10 @@ $phone = $body['phone'];
 $login = $body['login'];
 $password = password_hash($body['password'], PASSWORD_DEFAULT);
 
-	$host = $_ENV['DB_HOST'];
-	$database = $_ENV['DB_DATABASE'];
-	$user = $_ENV['DB_USERNAME'];
-	$password = $_ENV['DB_PASSWORD'];
+$host = $_ENV['DB_HOST'];
+$database = $_ENV['DB_DATABASE'];
+$user = $_ENV['DB_USERNAME'];
+$password = $_ENV['DB_PASSWORD'];
 
 $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
 
