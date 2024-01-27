@@ -8,10 +8,10 @@ $phone = $body['phone'];
 $login = $body['login'];
 $password = password_hash($body['password'], PASSWORD_DEFAULT);
 
-$db_host = '';
-$db_user = '';
-$db_password = '';
-$db_name = '';
+	$host = $_ENV['DB_HOST'];
+	$database = $_ENV['DB_DATABASE'];
+	$user = $_ENV['DB_USERNAME'];
+	$password = $_ENV['DB_PASSWORD'];
 
 $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
 
