@@ -2,16 +2,16 @@
 
 	$inData = getRequestInfo();
 	
-	$intnum = $inData['intnum'];
+	$intnum = $inData['id'];
 
 	
 	$searchResults = "";
 	$searchCount = 0;
 	
-	$host = 'localhost';
-	$user = 'sonny';
-	$password = 'P00SGroup21wasd';
-	$database = 'DBSHELTER';
+	$host = '';
+	$user = '';
+	$password = '';
+	$database = '';
 
 	$conn = new mysqli($host, $user, $password, $database);
 
