@@ -1,6 +1,11 @@
 <?php
 
-	require_once __DIR__ . '/../.env';
+	loadEnv(__DIR__.'/../.env');
+
+	$host = $_ENV['DB_HOST'];
+	$database = $_ENV['DB_DATABASE'];
+	$user = $_ENV['DB_USERNAME'];
+	$dbPassword = $_ENV['DB_PASSWORD'];
 
 	$inData = getRequestInfo();
 	
@@ -9,11 +14,6 @@
 	
 	$searchResults = "";
 	$searchCount = 0;
-	
-	$host = $_ENV['DB_HOST'];
-	$database = $_ENV['DB_DATABASE'];
-	$user = $_ENV['DB_USERNAME'];
-	$password = $_ENV['DB_PASSWORD'];
 
 	$conn = new mysqli($host, $user, $password, $database);
 
@@ -35,7 +35,6 @@
 		
 	}
 		
-
 	function getRequestInfo()
 	{
 		return json_decode(file_get_contents('php://input'), true);
@@ -58,4 +57,27 @@
 		$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
 		sendResultInfoAsJson($retValue);
 	}
+	
+function loadEnv($filePath)
+{
+    if (!file_exists($filePath)) {
+        throw new Exception('.env file not found');
+    }
+
+    $lines = file($filePath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+    foreach ($lines as $line) {
+
+        if (empty($line) || strpos($line, '#') === 0) {
+            continue;
+        }
+
+        list($key, $value) = explode('=', $line, 2);
+
+        $key = trim($key);
+        $value = trim($value);
+
+        $_ENV[$key] = $value;
+    }
+}
 ?>
