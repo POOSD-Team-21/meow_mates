@@ -8,10 +8,10 @@
 	$searchResults = "";
 	$searchCount = 0;
 	
-	$host = '';
-	$user = '';
-	$password = '';
-	$database = '';
+	$host = $_ENV['DB_HOST'];
+	$database = $_ENV['DB_DATABASE'];
+	$user = $_ENV['DB_USERNAME'];
+	$password = $_ENV['DB_PASSWORD'];
 
 	$conn = new mysqli($host, $user, $password, $database);
 
