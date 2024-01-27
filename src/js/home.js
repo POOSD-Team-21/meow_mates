@@ -5,7 +5,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 const signInLink = document.querySelector('#sign-in-link');
 const signOutButton = document.querySelector('#sign-out-button');
 const signUpButton = document.querySelector('#sign-up-button');
-const dashboard = document.querySelector('#dashboard-button')
+const dashboard = document.querySelector('#dashboard-button');
 
 // Edits customization for when user is logged in or not
 if (user) {
@@ -33,13 +33,11 @@ signOutButton.addEventListener('click', () => {
 // adds logic for dashboard button
 dashboard.addEventListener('click', () => {
   // if logged in, we go to dashboard
-  if (user)
-  {
+  if (user) {
     window.location.href = '/dashboard';
   }
   // otherwise takes to sign-in page as they are not logged in
-  else 
-  {
+  else {
     window.location.href = '/sign-in';
   }
 });
