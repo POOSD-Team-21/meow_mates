@@ -4,10 +4,10 @@ $body = get_request_body();
 $login = $body['login'];
 $password = $body['password'];
 
-$db_host = '';
-$db_user = '';
-$db_password = '';
-$db_name = '';
+	$host = $_ENV['DB_HOST'];
+	$database = $_ENV['DB_DATABASE'];
+	$user = $_ENV['DB_USERNAME'];
+	$password = $_ENV['DB_PASSWORD'];
 
 $connection = new mysqli($db_host, $db_user, $db_password, $db_name);
 
