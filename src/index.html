@@ -12,19 +12,19 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
     <link rel="manifest" href="assets/favicon/site.webmanifest" />
   </head>
-  <body class="antialiased bg-main-background-color border-main-text-color">
+  <body class="border-main-text-color bg-main-background-color antialiased">
     <div class="flex min-h-screen flex-col">
       <header class="my-4 flex items-center justify-between gap-4 px-10 text-main-text-color">
         <a class="whitespace-nowrap font-semibold" href="/">Meow Mates</a>
         <nav>
           <a
-            class="flex whitespace-nowrap rounded-md bg-zinc-900 px-4 py-2 font-semibold text-white shadow-sm text-[#FFFFFF] bg-main-text-color hover:underline hover:shadow-lg transition duration-300 focus:ring-2 focus:ring-offset-2 focus:underline focus:ring-main-text-color"
+            class="bg-zinc-900 text-white flex whitespace-nowrap rounded-md bg-main-text-color px-4 py-2 font-semibold text-[#FFFFFF] shadow-sm transition duration-300 hover:underline hover:shadow-lg focus:underline focus:ring-2 focus:ring-main-text-color focus:ring-offset-2"
             href="/sign-in.html"
             >Sign In</a
           >
           <button
             id="sign-out-button"
-            class="flex whitespace-nowrap rounded-md bg-zinc-900 px-4 py-2 font-semibold text-white shadow-sm text-[#FFFFFF] bg-main-text-color hover:underline hover:shadow-lg transition duration-300 focus:ring-2 focus:ring-offset-2 focus:underline focus:ring-main-text-color"
+            class="bg-zinc-900 text-white flex whitespace-nowrap rounded-md bg-main-text-color px-4 py-2 font-semibold text-[#FFFFFF] shadow-sm transition duration-300 hover:underline hover:shadow-lg focus:underline focus:ring-2 focus:ring-main-text-color focus:ring-offset-2"
           >
             Sign Out
           </button>
@@ -32,48 +32,58 @@
       </header>
       <main class="mb-16 mt-16 flex flex-1 flex-col justify-center px-8">
         <section class="mb-16 flex flex-col justify-between text-center md:text-left">
-          <h1 class="mb-2 text-4xl font-semibold md:text-5xl text-main-text-color">Meow Mates</h1>
-          <h2 class="mx-auto mb-4 max-w-96 text-xl md:mx-0 md:max-w-none md:text-2xl text-main-text-color">
+          <h1 class="mb-2 text-4xl font-semibold text-main-text-color md:text-5xl">Meow Mates</h1>
+          <h2 class="mx-auto mb-4 max-w-96 text-xl text-main-text-color md:mx-0 md:max-w-none md:text-2xl">
             Comprehensive Care Management for Pet Hospitals & Shelters
           </h2>
           <div class="mx-auto flex gap-2 md:mx-0">
-            <button class="flex whitespace-nowrap rounded-md bg-zinc-900 px-4 py-2 font-semibold text-white shadow-sm text-[#FFFFFF] bg-main-text-color hover:underline hover:shadow-lg transition duration-300 focus:ring-2 focus:ring-offset-2 focus:underline focus:ring-main-text-color">
+            <button
+              class="bg-zinc-900 text-white flex whitespace-nowrap rounded-md bg-main-text-color px-4 py-2 font-semibold text-[#FFFFFF] shadow-sm transition duration-300 hover:underline hover:shadow-lg focus:underline focus:ring-2 focus:ring-main-text-color focus:ring-offset-2"
+            >
               Go to Dashboard
             </button>
             <button
-              class="flex whitespace-nowrap rounded-md px-4 py-2 font-semibold text-zinc-900 shadow-sm text-[#FFFFFF] bg-main-text-color hover:underline hover:shadow-lg transition duration-300 focus:ring-2 focus:ring-offset-2 focus:underline focus:ring-main-text-color"
+              class="text-zinc-900 flex whitespace-nowrap rounded-md bg-main-text-color px-4 py-2 font-semibold text-[#FFFFFF] shadow-sm transition duration-300 hover:underline hover:shadow-lg focus:underline focus:ring-2 focus:ring-main-text-color focus:ring-offset-2"
             >
               Sign Up
             </button>
           </div>
         </section>
-        <section class="text-main-text-color grid grid-cols-1 gap-4 md:grid-cols-2 md:flex-row lg:grid-cols-4">
-          <div class="bg-[#FFFFFF] rounded bg-zinc-100 p-6 text-container bg-gradient-to-r from-gray-400 to-white shadow-md">
-            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded bg-zinc-200 text-2xl">🐱</div>
+        <section class="grid grid-cols-1 gap-4 text-main-text-color md:grid-cols-2 md:flex-row lg:grid-cols-4">
+          <div
+            class="bg-zinc-100 text-container from-gray-400 to-white rounded bg-[#FFFFFF] bg-gradient-to-r p-6 shadow-md"
+          >
+            <div class="bg-zinc-200 mb-5 flex h-12 w-12 items-center justify-center rounded text-2xl">🐱</div>
             <h1 class="mb-2 font-semibold">Simple</h1>
             <p>
               Effortlessly manage pet records, appointments, and treatments with our intuitive interface designed for
               busy shelters and clinics.
             </p>
           </div>
-          <div class="bg-[#FFFFFF] rounded bg-zinc-100 p-6 text-container bg-gradient-to-r from-gray-400 to-white shadow-md">
-            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded bg-zinc-200 text-2xl">🐶</div>
+          <div
+            class="bg-zinc-100 text-container from-gray-400 to-white rounded bg-[#FFFFFF] bg-gradient-to-r p-6 shadow-md"
+          >
+            <div class="bg-zinc-200 mb-5 flex h-12 w-12 items-center justify-center rounded text-2xl">🐶</div>
             <h1 class="mb-2 font-semibold">Completely Free</h1>
             <p>
               Get started without any costs - ideal for non-profit organizations and small clinics looking to streamline
               their operations.
             </p>
           </div>
-          <div class="bg-[#FFFFFF] rounded bg-zinc-100 p-6 text-container bg-gradient-to-r from-gray-400 to-white shadow-md">
-            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded bg-zinc-200 text-2xl">🦎</div>
+          <div
+            class="bg-zinc-100 text-container from-gray-400 to-white rounded bg-[#FFFFFF] bg-gradient-to-r p-6 shadow-md"
+          >
+            <div class="bg-zinc-200 mb-5 flex h-12 w-12 items-center justify-center rounded text-2xl">🦎</div>
             <h1 class="mb-2 font-semibold">Hundreds of Users</h1>
             <p>
               Join a growing community of veterinarians and shelter workers who trust Meow Mates for reliable pet
               management.
             </p>
           </div>
-          <div class="bg-[#FFFFFF] rounded bg-zinc-100 p-6 text-container bg-gradient-to-r from-gray-400 to-white shadow-md">
-            <div class="mb-5 flex h-12 w-12 items-center justify-center rounded bg-zinc-200 text-2xl">🦜</div>
+          <div
+            class="bg-zinc-100 text-container from-gray-400 to-white rounded bg-[#FFFFFF] bg-gradient-to-r p-6 shadow-md"
+          >
+            <div class="bg-zinc-200 mb-5 flex h-12 w-12 items-center justify-center rounded text-2xl">🦜</div>
             <h1 class="mb-2 font-semibold">Lorem ipsum dolor</h1>
             <p>
               Monitor health records, vaccination dates, and adoption statuses all in one place - because every pet
@@ -84,7 +94,7 @@
       </main>
     </div>
 
-    <footer class="border-t py-8 text-center text-sm text-zinc-500 text-main-text-color">
+    <footer class="text-zinc-500 border-t py-8 text-center text-sm text-main-text-color">
       <p class="font-medium">Released under the MIT License</p>
       <p class="font-medium">Copyright © 2022-present Meow Mates</p>
     </footer>
