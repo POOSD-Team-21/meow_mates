@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <script defer src="./js/index.js"></script>
     <link rel="stylesheet" href="./styles.css" />
     <!-- Favicon Code Links-->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
@@ -17,10 +18,17 @@
         <a class="whitespace-nowrap font-semibold" href="/">Meow Mates</a>
         <nav>
           <a
+            id="sign-in-link"
             class="flex whitespace-nowrap rounded-md bg-zinc-900 px-4 py-2 font-semibold text-white shadow-sm"
             href="/sign-in.html"
             >Sign In</a
           >
+          <button
+            id="sign-out-button"
+            class="flex whitespace-nowrap rounded-md bg-zinc-900 px-4 py-2 font-semibold text-white shadow-sm"
+          >
+            Sign Out
+          </button>
         </nav>
       </header>
       <main class="mb-16 mt-16 flex flex-1 flex-col justify-center px-8">
