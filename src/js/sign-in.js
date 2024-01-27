@@ -13,7 +13,12 @@ signInForm.addEventListener('submit', async (e) => {
     return;
   }
 
-  localStorage.setItem('user', JSON.stringify(data.user));
+  localStorage.setItem(
+    'user',
+    JSON.stringify({
+      id: data.id,
+    }),
+  );
 
   // Redirect to the dashboard
   window.location.href = '/dashboard.html';
