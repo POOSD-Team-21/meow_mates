@@ -43,12 +43,12 @@ if ($result->num_rows == 0) {
 }
 
 $row = $result->fetch_assoc();
-// $hashedPassword = $row['PASSWORD'];
+$hashedPassword = $row['PASSWORD'];
 
-// if (!password_verify($enteredPassword, $hashedPassword)) {
-    // send_json(json_encode(array('error' => 'Incorrect login or password')));
-    // exit;
-// }
+if (!password_verify($enteredPassword, $hashedPassword)) {
+    send_json(json_encode(array('error' => 'Incorrect login or password')));
+    exit;
+}
 
 send_json(json_encode(array('id' => $row['INTNUM'])));
 
