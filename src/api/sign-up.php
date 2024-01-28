@@ -11,18 +11,22 @@ error_log('Loading environment variables');
 
 $body = get_request_body();
 
-$login = $body['login'];
-
 // Log the received data
 error_log('Received data: ' . print_r($body, true));
 
 // Check if 'password' and 'login' fields are missing
-if (empty($body['password']) || empty($login)) {
+if (empty($body['password']) || empty($body['login'])) {
     send_json(json_encode(['error' => 'Missing required fields']));
     exit;
 }
 
+$login = $body['login'];
 $password = password_hash($body['password'], PASSWORD_DEFAULT);
+$first = ($body['first'] === NULL || $body['first'] === '') ? '' : $body['first'];
+$last = ($body['last'] === NULL || $body['last'] === '') ? '' : $body['last'];
+$email = ($body['email'] === NULL || $body['email'] === '') ? NULL : $body['email'];
+$phone = ($body['phone'] === NULL || $body['phone'] === '') ? NULL : $body['phone'];
+
 
 $connection = new mysqli($host, $user, $dbPassword, $database);
 
@@ -32,7 +36,7 @@ if ($connection->connect_error) {
     exit;
 }
 
-$query = "INSERT INTO USERS (LOGIN, PASSWORD) VALUES (?, ?)";
+$query = "INSERT INTO USERS (LOGIN, PASSWORD, FIRST, LAST, EMAIL, PHONE) VALUES (?,?,?,?,?,?)";
 
 $statement = $connection->prepare($query);
 
@@ -42,7 +46,7 @@ if (!$statement) {
     exit;
 }
 
-$statement->bind_param('ss', $login, $password);
+$statement->bind_param('ssssss', $login, $password, $first, $last, $email, $phone);
 
 if (!$statement->execute()) {
     error_log('Execute statement error: ' . $statement->error);
