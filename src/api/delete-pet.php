@@ -15,7 +15,7 @@
 	$searchResults = "";
 	$searchCount = 0;
 
-	$conn = new mysqli($host, $user, $dbpassword, $database);
+	$conn = new mysqli($host, $user, $dbPassword, $database);
 
 	if ($conn->connect_error) 
 	{
