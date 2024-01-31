@@ -36,6 +36,12 @@ if ($connection->connect_error) {
     exit;
 }
 
+// Check if the username is already taken
+if (is_username_taken($connection, $login)) {
+    send_json(json_encode(['error' => 'Username already exists']));
+    exit;
+}
+
 $query = "INSERT INTO USERS (LOGIN, PASSWORD, FIRST, LAST, EMAIL, PHONE) VALUES (?,?,?,?,?,?)";
 
 $statement = $connection->prepare($query);
@@ -96,5 +102,28 @@ function loadEnv($filePath)
     }
 
     error_log('Finished loading .env file');
+}
+
+function is_username_taken($connection, $username)
+{
+    $query = "SELECT COUNT(*) as count FROM USERS WHERE LOGIN = ?";
+    $statement = $connection->prepare($query);
+    
+    if (!$statement) {
+        error_log('Prepare statement error: ' . $connection->error);
+        return true; // Assuming an error means username is taken
+    }
+
+    $statement->bind_param('s', $username);
+    $statement->execute();
+
+    $result = $statement->get_result();
+    $row = $result->fetch_assoc();
+
+    $count = $row['count'];
+
+    $statement->close();
+
+    return $count > 0;
 }
 ?>
