@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | Meow Mates</title>
+    <title>Dashboard | Meow Mates</title>
     <script defer src="./js/dashboard.js"></script>
     <link rel="stylesheet" href="./styles.css" />
     <!-- Favicon Code Links-->
@@ -12,7 +12,48 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
     <link rel="manifest" href="assets/favicon/site.webmanifest" />
   </head>
-  <body class="flex h-screen antialiased">
-    This is the dashboard
+  <body class="border-main-text-color bg-main-background-color antialiased">
+    <div class="flex min-h-screen flex-col">
+      <header class="my-4 flex items-center justify-between gap-4 px-10 text-main-text-color">
+        <a
+          class="whitespace-nowrap rounded bg-main-background-color px-2 py-1 font-semibold transition focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
+          href="/"
+          >Meow Mates</a
+        >
+        <nav>
+          <a
+            id="sign-in-link"
+            class="flex whitespace-nowrap rounded-md bg-main-text-color px-4 py-2 font-semibold text-white shadow-md transition duration-300 hover:bg-main-text-color/90 focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
+            href="/sign-in"
+            >Sign In</a
+          >
+          <button
+            id="sign-out-button"
+            class="flex whitespace-nowrap rounded-md bg-main-text-color px-4 py-2 font-semibold text-white shadow-md transition duration-300 hover:bg-main-text-color/90 focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
+          >
+            Sign Out
+          </button>
+        </nav>
+      </header>
+      <main class="mb-16 mt-4 flex flex-1 flex-col px-8">
+        <div class="mb-4 flex gap-4">
+          <button
+            id="add-pet-button"
+            class="flex whitespace-nowrap rounded-md bg-main-text-color px-4 py-2 font-semibold text-white shadow-md transition duration-300 hover:bg-main-text-color/90 focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
+          >
+            Add Pet
+          </button>
+          <input
+            class="w-full rounded-md border border-main-text-color px-4 py-2 text-sm transition focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
+            placeholder="search pets"
+            type="text"
+          />
+        </div>
+
+        <div id="card-grid" class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <!-- Cards will be rendered here -->
+        </div>
+      </main>
+    </div>
   </body>
 </html>
