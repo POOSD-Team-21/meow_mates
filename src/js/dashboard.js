@@ -1,7 +1,17 @@
+// Grab the user from local storage
+const user = JSON.parse(localStorage.getItem('user'));
+
+// If the user is not logged in, redirect to the sign-in page
+if (!user) {
+  window.location.href = '/sign-in';
+}
+
 // Allows html to be formatted with Prettier
 const html = String.raw;
 
-// Dummy pets data
+// NOTE: Do not use comments in the html template literals
+
+// Dummy pet data (to be replaced with real data)
 const dummyPets = [
   {
     id: 1,
@@ -55,7 +65,6 @@ const dummyPets = [
   },
 ];
 
-// Function to flip each card
 function flip(card) {
   // First child is the inner card element we want to animate flipping
   card.classList.toggle('rotate-y-180');
@@ -67,7 +76,10 @@ function flip(card) {
   });
 }
 
+// Grab the card grid where we will display the pet cards
 const cardGrid = document.querySelector('#card-grid');
+
+// For each pet, create a card
 const cards = dummyPets.map((dummyPet) => {
   return html`
     <div class="group h-full w-full" style="perspective: 1000px" onclick="flip(this.children[0])">
@@ -147,16 +159,9 @@ const cards = dummyPets.map((dummyPet) => {
     </div>
   `;
 });
+
+// Insert the cards into the card grid
 cardGrid.innerHTML = cards.join('');
-
-// Check if the user is logged in
-// If not, redirect to the sign in page
-// If so, display the dashboard
-
-const user = JSON.parse(localStorage.getItem('user'));
-if (!user) {
-  window.location.href = '/sign-in.html';
-}
 
 const signInLink = document.querySelector('#sign-in-link');
 const signOutButton = document.querySelector('#sign-out-button');
@@ -231,6 +236,7 @@ function showModal(purpose, data) {
     // For edit, data will be the pet object with id
     // For data, data will be undefined
   } else if (purpose === 'add' || purpose === 'edit') {
+    // For edit, the form will be pre-filled with the pet's data
     modalContent = html`
       <form
         class="mx-auto flex w-[350px] flex-col gap-2"
@@ -316,7 +322,7 @@ function showModal(purpose, data) {
     `;
   }
 
-  const modalOverlay = html`
+  const modal = html`
     <div
       ${purpose === 'edit' || purpose === 'add' ? 'onclick="hideModal()"' : ''}
       id="modal-overlay"
@@ -333,7 +339,7 @@ function showModal(purpose, data) {
   `;
 
   // Insert the modal overlay at the end of the body
-  body.insertAdjacentHTML('beforeend', modalOverlay);
+  body.insertAdjacentHTML('beforeend', modal);
 
   // Trap focus inside the modal by making everything outside the modal inert
   const bodyChildren = Array.from(document.body.children);
@@ -359,18 +365,22 @@ function hideModal() {
 
   const modalOverlay = document.querySelector('#modal-overlay');
   const modal = document.querySelector('#modal');
+
+  // This will trigger the fade-out animation
   modalOverlay.dataset.state = 'closed';
   modal.dataset.state = 'closed';
+
   // Remove the modal overlay after its fade-out animation ends
   modalOverlay.addEventListener('animationend', () => {
     modalOverlay.remove();
   });
+
   // Remove the modal after its fade-out animation ends
   modal.addEventListener('animationend', () => {
     modal.remove();
   });
 
-  // Remove inert attribute from all elements
+  // Allow elements outside the modal to be interacted with again
   const bodyChildren = Array.from(document.body.children);
   bodyChildren.forEach((child) => {
     child.removeAttribute('inert');
