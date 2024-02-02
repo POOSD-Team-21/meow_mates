@@ -154,9 +154,9 @@ cardGrid.innerHTML = cards.join('');
 // If so, display the dashboard
 
 const user = JSON.parse(localStorage.getItem('user'));
-// if (!user) {
-//   window.location.href = '/sign-in.html';
-// }
+if (!user) {
+  window.location.href = '/sign-in.html';
+}
 
 const signInLink = document.querySelector('#sign-in-link');
 const signOutButton = document.querySelector('#sign-out-button');
@@ -228,11 +228,16 @@ function showModal(purpose, data) {
         </button>
       </div>
     `;
-    // For edit, data will be the pet object
+    // For edit, data will be the pet object with id
     // For data, data will be undefined
   } else if (purpose === 'add' || purpose === 'edit') {
     modalContent = html`
-      <form class="mx-auto flex w-[350px] flex-col gap-2" onsubmit="">
+      <form
+        class="mx-auto flex w-[350px] flex-col gap-2"
+        onsubmit="event.preventDefault(); ${purpose === 'add'
+          ? 'addPet(Object.fromEntries(new FormData(this)))'
+          : `editPet({ id: ${data.id}, ...Object.fromEntries(new FormData(this)) })`}"
+      >
         <label for="petFirst" class="text-base">Pet First Name</label>
         <input
           class="rounded-md border border-main-text-color px-4 py-2 shadow-md transition placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-white"
