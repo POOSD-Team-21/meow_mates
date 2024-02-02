@@ -11,6 +11,8 @@ const html = String.raw;
 
 // NOTE: Do not use comments in the html template literals
 
+/* Modal code */
+
 // Dummy pet data (to be replaced with real data)
 const dummyPets = [
   {
@@ -386,3 +388,28 @@ function hideModal() {
     child.removeAttribute('inert');
   });
 }
+
+/* Search related code */
+
+const searchInput = document.querySelector('#search-pets-input');
+// Debounce the search input so it only fires after the user stops typing
+
+// Delays the execution of a callback function until a certain amount of time has passed without any further invocations.
+const debounce = (callback, wait) => {
+  let timeoutId = null;
+  return (...args) => {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => {
+      callback(...args);
+    }, wait);
+  };
+};
+
+// When the user types in the search input, search for pets
+searchInput.addEventListener(
+  'input',
+  debounce((event) => {
+    const searchTerm = event.target.value;
+    // TODO: implement search
+  }, 500),
+);
