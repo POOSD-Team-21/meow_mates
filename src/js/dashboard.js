@@ -7,7 +7,7 @@ const dummyPets = [
     id: 1,
     firstName: 'John',
     lastName: 'Doe',
-    type: 'Dog',
+    type: 'cat',
     caretakerFirstName: 'Caleb',
     caretakerLastName: 'Rivera',
     caretakerEmail: 'calebrossr@gmail.com',
@@ -17,7 +17,7 @@ const dummyPets = [
     id: 2,
     firstName: 'John',
     lastName: 'Doe',
-    type: 'Dog',
+    type: 'dog',
     caretakerFirstName: 'Caleb',
     caretakerLastName: 'Rivera',
     caretakerEmail: 'calebrossr@gmail.com',
@@ -27,7 +27,7 @@ const dummyPets = [
     id: 3,
     firstName: 'John',
     lastName: 'Doe',
-    type: 'Dog',
+    type: 'dog',
     caretakerFirstName: 'Caleb',
     caretakerLastName: 'Rivera',
     caretakerEmail: 'calebrossr@gmail.com',
@@ -37,7 +37,7 @@ const dummyPets = [
     id: 4,
     firstName: 'John',
     lastName: 'Doe',
-    type: 'Dog',
+    type: 'dog',
     caretakerFirstName: 'Caleb',
     caretakerLastName: 'Rivera',
     caretakerEmail: 'calebrossr@gmail.com',
@@ -47,7 +47,7 @@ const dummyPets = [
     id: 5,
     firstName: 'John',
     lastName: 'Doe',
-    type: 'Dog',
+    type: 'dog',
     caretakerFirstName: 'Caleb',
     caretakerLastName: 'Rivera',
     caretakerEmail: 'calebrossr@gmail.com',
@@ -70,10 +70,10 @@ function flip(card) {
 const cardGrid = document.querySelector('#card-grid');
 const cards = dummyPets.map((dummyPet) => {
   return html`
-    <div class="h-full w-full" style="perspective: 1000px" onclick="flip(this.children[0])">
+    <div class="group h-full w-full" style="perspective: 1000px" onclick="flip(this.children[0])">
       <div
         role="button"
-        class="flex h-[300px] w-full rounded-md text-left ring-main-text-color transition duration-300 transform-style-3d focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-background-color"
+        class="flex h-[300px] w-full rounded-md text-left ring-main-text-color transition-all duration-300 transform-style-3d focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-background-color group-hover:-translate-y-2"
         tabindex="0"
       >
         <div
@@ -101,8 +101,8 @@ const cards = dummyPets.map((dummyPet) => {
       </div>
       <div class="fixed bottom-6 right-6 flex gap-2">
         <button
-          onclick="event.stopPropagation(); showModal('delete')"
-          class="z-40 rounded-md bg-red-500 p-2 text-white shadow-md transition hover:bg-red-500/90  focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white"
+          onclick="event.stopPropagation(); showModal('delete', ${dummyPet.id})"
+          class="z-40 rounded-md bg-red-500 p-2 text-white shadow-md transition-all hover:bg-red-500/90 focus:outline-none  focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white group-hover:-translate-y-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -124,8 +124,8 @@ const cards = dummyPets.map((dummyPet) => {
           </svg>
         </button>
         <button
-          onclick="event.stopPropagation(); showModal('edit')"
-          class="z-40 rounded-md bg-orange-500 p-2 text-white shadow transition hover:bg-orange-500/90 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white"
+          onclick="event.stopPropagation(); showModal('edit', ${JSON.stringify(dummyPet).replace(/"/g, '&quot;')})"
+          class="z-40 rounded-md bg-orange-500 p-2 text-white shadow transition-all hover:bg-orange-500/90 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white group-hover:-translate-y-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -198,7 +198,7 @@ function deletePet(id) {
 }
 
 // Purpose must be 'add', 'edit', or 'delete'
-function showModal(purpose) {
+function showModal(purpose, data) {
   const body = document.querySelector('body');
 
   // Prevent scrolling when the modal is open
@@ -206,7 +206,7 @@ function showModal(purpose) {
 
   let modalContent = '';
 
-  // For delete, data needs to be the id of the pet to delete
+  // For delete, data will be the id of the pet
   if (purpose === 'delete') {
     modalContent = html`
       <div>
@@ -221,13 +221,15 @@ function showModal(purpose) {
           Cancel
         </button>
         <button
-          onclick="deletePet(1)"
-          class="rounded-md border border-main-text-color bg-main-text-color px-4 py-2 text-white transition hover:bg-main-text-color/90 focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-white"
+          onclick="deletePet(${data})"
+          class="rounded-md border border-red-500 bg-red-500 px-4 py-2 text-white transition hover:bg-red-500/90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white"
         >
           Delete
         </button>
       </div>
     `;
+    // For edit, data will be the pet object
+    // For data, data will be undefined
   } else if (purpose === 'add' || purpose === 'edit') {
     modalContent = html`
       <form class="mx-auto flex w-[350px] flex-col gap-2" onsubmit="">
@@ -238,6 +240,7 @@ function showModal(purpose) {
           name="petFirst"
           placeholder="pet first name"
           type="text"
+          ${purpose === 'edit' ? `value="${data.firstName}"` : ''}
         />
         <label for="petLast" class="text-base">Pet Last Name</label>
         <input
@@ -246,6 +249,7 @@ function showModal(purpose) {
           name="petLast"
           placeholder="pet last name"
           type="text"
+          ${purpose === 'edit' ? `value="${data.lastName}"` : ''}
         />
         <label for="first" class="text-base">Pet Type</label>
         <select
@@ -253,9 +257,13 @@ function showModal(purpose) {
           name="petType"
           class="rounded-md border border-main-text-color px-4 py-2 shadow-md transition placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-white"
         >
-          <option value="dog">Dog</option>
-          <option value="cat">Cat</option>
-          <option value="bird">Bird</option>
+          ${['dog', 'cat', 'bird', 'fish', 'reptile', 'other'].map(
+            (type) => html`
+              <option value="${type}" ${purpose === 'edit' && data.type === type ? 'selected' : ''}>
+                ${type.charAt(0).toUpperCase() + type.slice(1)}
+              </option>
+            `,
+          )}
         </select>
         <label for="caretakerFirst" class="text-base">Caretaker First Name</label>
         <input
@@ -264,30 +272,34 @@ function showModal(purpose) {
           name="caretakerFirst"
           placeholder="caretaker first name"
           type="text"
+          ${purpose === 'edit' ? `value="${data.caretakerFirstName}"` : ''}
         />
         <label for="caretakerLast" class="text-base">Caretaker Last Name</label>
         <input
           class="rounded-md border border-main-text-color px-4 py-2 shadow-md transition placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-white"
           id="caretakerLast"
           name="caretakerLast"
-          placeholder="pet last name"
+          placeholder="caretaker last name"
           type="text"
+          ${purpose === 'edit' ? `value="${data.caretakerLastName}"` : ''}
         />
         <label for="caretakerEmail" class="text-base">Caretaker Email</label>
         <input
           class="rounded-md border border-main-text-color px-4 py-2 shadow-md transition placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-white"
           id="caretakerEmail"
           name="caretakerEmail"
-          placeholder="pet last name"
+          placeholder="caretaker email"
           type="text"
+          ${purpose === 'edit' ? `value="${data.caretakerEmail}"` : ''}
         />
         <label for="caretakerPhone" class="text-base">Caretaker Phone</label>
         <input
           class="rounded-md border border-main-text-color px-4 py-2 shadow-md transition placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-white"
           id="caretakerPhone"
           name="caretakerPhone"
-          placeholder="pet last name"
+          placeholder="caretaker phone"
           type="text"
+          ${purpose === 'edit' ? `value="${data.caretakerPhone}"` : ''}
         />
         <button
           class="mt-2 rounded-md bg-main-text-color px-4 py-2 font-semibold text-white shadow-md outline-none transition duration-300 hover:bg-main-text-color/90 focus:ring-2 focus:ring-main-text-color focus:ring-offset-2"
@@ -323,6 +335,13 @@ function showModal(purpose) {
   bodyChildren.forEach((child) => {
     if (child.id !== 'modal-overlay' && child.id !== 'modal') {
       child.setAttribute('inert', '');
+    }
+  });
+
+  // Pressing the escape key should close the modal
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      hideModal();
     }
   });
 }
