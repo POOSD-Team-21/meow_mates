@@ -13,9 +13,13 @@
     <link rel="manifest" href="assets/favicon/site.webmanifest" />
   </head>
   <body class="flex h-screen antialiased">
-    <div class="bg-zinc-900 text-white relative hidden flex-1 flex-col items-center bg-main-text-color md:block">
+    <div class="relative hidden flex-1 flex-col items-center bg-main-text-color text-white md:block">
       <!-- Aesthetic Section -->
-      <a href="/" class="absolute left-8 top-8 text-lg text-[#FFFFFF] hover:underline focus:underline">Meow Mates</a>
+      <a
+        href="/"
+        class="absolute left-8 top-8 rounded-md bg-main-text-color p-2 text-lg text-white transition focus:outline-none focus:ring-2 focus:ring-main-background-color focus:ring-offset-2 focus:ring-offset-main-text-color"
+        >Meow Mates</a
+      >
       <div class="flex h-full w-full items-center justify-center">
         <img
           class="h-96 w-96 object-contain"
@@ -29,7 +33,7 @@
     >
       <a
         href="./sign-up.html"
-        class="absolute right-8 top-8 rounded-md bg-main-text-color px-4 py-2 font-semibold text-[#FFFFFF] shadow-sm transition duration-300 hover:underline hover:shadow-lg focus:underline focus:ring-2 focus:ring-main-text-color focus:ring-offset-2"
+        class="absolute right-8 top-8 rounded-md bg-main-text-color px-4 py-2 font-semibold text-white shadow-sm transition duration-300 hover:bg-main-text-color/90 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
         >Sign Up</a
       >
 
@@ -38,15 +42,15 @@
       <p class="mb-6 text-center text-main-text-color">Enter your username and password</p>
       <div
         id="incorrect-login-error"
-        class="bg-zinc-900 mb-3 rounded-md bg-main-text-color px-[0.75rem] py-2 font-semibold text-[#FFFFFF] shadow-sm"
+        class="mb-3 rounded-md bg-main-text-color px-[0.75rem] py-2 font-semibold text-white shadow-sm"
       >
         <p>&#x26A0; Error: Incorrect login made! Try again.</p>
       </div>
       <form id="sign-in-form" class="mx-auto flex w-[350px] flex-col gap-2">
         <div class="flex flex-col">
-          <label for="username" class="text-base">Username:</label>
+          <label for="username" class="text-base">Username</label>
           <input
-            class="rounded-md border-2 px-3 py-1 shadow-sm placeholder:text-sm"
+            class="rounded-md border border-main-text-color px-4 py-2 shadow-sm outline-none transition placeholder:text-sm focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
             id="username"
             name="login"
             placeholder="username"
@@ -54,9 +58,9 @@
           />
         </div>
         <div class="flex flex-col">
-          <label for="password" class="text-base">Password:</label>
+          <label for="password" class="text-base">Password</label>
           <input
-            class="rounded-md border-2 px-3 py-1 shadow-sm placeholder:text-sm"
+            class="rounded-md border border-main-text-color px-4 py-2 shadow-sm transition placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
             is="password"
             name="password"
             placeholder="password"
@@ -64,14 +68,14 @@
           />
         </div>
         <button
-          class="bg-zinc-900 mt-2 rounded-md bg-main-text-color px-4 py-2 font-semibold text-[#FFFFFF] shadow-sm transition duration-300 hover:underline hover:shadow-lg focus:underline focus:ring-2 focus:ring-main-text-color focus:ring-offset-2"
+          class="mt-2 rounded-md border border-main-text-color bg-main-text-color px-4 py-2 font-semibold text-white shadow-sm transition duration-300 hover:bg-main-text-color/90 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
           type="submit"
         >
           Sign In
         </button>
       </form>
       <a
-        class="mt-5 underline transition duration-300 hover:border hover:border-main-text-color focus:ring-2 focus:ring-main-text-color focus:ring-offset-2"
+        class="mt-5 rounded-md bg-main-background-color px-1 underline transition duration-300 hover:border hover:border-main-text-color focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
         href="/sign-up"
       >
         Don't have an account? Create one now!
