@@ -1,3 +1,11 @@
+// Get the user from local storage
+const user = JSON.parse(localStorage.getItem('user'));
+
+// If user is already logged in, redirect to dashboard
+if (user) {
+  window.location.href = '/dashboard';
+}
+
 const signInForm = document.querySelector('#sign-in-form');
 const loggedInFail = document.querySelector('#incorrect-login-error');
 
