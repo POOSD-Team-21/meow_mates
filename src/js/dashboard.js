@@ -186,10 +186,37 @@ addPetButton.addEventListener('click', () => {
   showModal('add');
 });
 
-function addPet(pet) {
-  // TODO: implement
-  console.log(pet);
-  // hideModal();
+// adds pet based on form
+async function addPet(pet) {
+  try {
+    
+    const apiUrl = '/api/add-pet.php';
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+
+      // sends the form data to the server
+      body: JSON.stringify(pet),
+    });
+
+    const result = await response.json();
+
+    // Check for errors or success
+    if (data.error) {
+      // triggers when connected, but server gives error
+      console.error('Error deleting pet:', data.error);
+  } else {
+      // success in terms of reaching the API
+      console.log('Pet added successfully:', result);
+      hideModal();
+  }
+  } catch (error) {
+    // Server fails to connect or send data
+    console.error('Error adding pet:', error.message);
+  }
 }
 
 function editPet(pet) {
