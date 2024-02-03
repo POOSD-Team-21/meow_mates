@@ -92,37 +92,44 @@ const cards = dummyPets.map((dummyPet) => {
     // for dogs
     case 'dog':
       imageSrc = '/assets/pet_images/dog.jpg';
+      altText = 'Image of a dog representing dog pets';
       break;
     
     // for cats
     case 'cat':
       imageSrc = '/assets/pet_images/cat.jpg';
+      altText = 'Image of standard issue cat, representing cat pets';
       break;
     
     // for birds
     case 'bird':
       imageSrc = 'path/to/bird-image.jpg';
+      altText = 'Image of a colorful parrot, representing bird pets';
       break;
     
     // for sharks
     case 'shark':
       imageSrc = '/assets/pet_images/shark.jpg';
+      altText = 'Image of a shark, representing shark pets';
       break;
     
     // for fish
     case 'fish':
       imageSrc = '/assets/pet_images/fish.jpg';
+      altText = 'Image of a gold fish, representing fish pets';
       break;
     
     // for reptiles
     case 'reptile':
       imageSrc = '/assets/pet_images/reptile.jpg';
+      altText = 'Image of a snake representing reptile pets';
       break;
     
     // it was not a case or is an other type
     default:
       // Default image for unknown types
       imageSrc = '/assets/pet_images/other.jpg';
+      altText = 'Image of hamster, representing other types of pets.';
   }
 
   return html`
@@ -135,6 +142,13 @@ const cards = dummyPets.map((dummyPet) => {
         <div
           class="absolute h-full w-full overflow-hidden rounded-md border border-main-text-color bg-white p-6 text-main-text-color shadow-md backface-hidden"
         >
+        <div class="fixed top-2 left-2">
+        <img
+          src="${imageSrc}"
+          alt="${altText}"
+          class="w-16 h-16 rounded-full"
+        />
+      </div>
           <div>${dummyPet.firstName} ${dummyPet.lastName}</div>
         </div>
         <div
