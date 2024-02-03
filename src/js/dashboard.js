@@ -139,34 +139,45 @@ const cards = dummyPets.map((dummyPet) => {
         class="flex h-[300px] w-full rounded-md text-left ring-main-text-color transition-all duration-300 transform-style-3d focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-background-color group-hover:-translate-y-2"
         tabindex="0"
       >
-        <div
-          class="absolute h-full w-full overflow-hidden rounded-md border border-main-text-color bg-white p-6 text-main-text-color shadow-md backface-hidden"
-        >
-        <div class="fixed top-2 left-2">
-        <img
-          src="${imageSrc}"
-          alt="${altText}"
-          class="w-16 h-16 rounded-full"
-        />
-      </div>
-          <div>${dummyPet.firstName} ${dummyPet.lastName}</div>
+      <div class="absolute h-full w-full overflow-hidden rounded-md border border-main-text-color bg-white p-6 text-main-text-color shadow-md backface-hidden flex items-center justify-center">
+      <div class="flex items-center">
+        <div class="mr-8">
+          <img
+            src="${imageSrc}"
+            alt="${altText}"
+            class="w-32 h-32 rounded-full"
+          />
         </div>
+        <dl>
+          <dt><strong>First Name:</strong></dt>
+          <dd>${dummyPet.firstName}</dd>
+    
+          <dt><strong>Last Name:</strong></dt>
+          <dd>${dummyPet.lastName}</dd>
+    
+         </dl>
+      </div>
+    </div>
         <div
           class="absolute h-full w-full overflow-hidden rounded-md border border-main-text-color bg-white p-6 text-main-text-color shadow-md rotate-y-180 backface-hidden"
         >
-          ${JSON.stringify(
-            {
-              type: dummyPet.type,
-              caretaker: {
-                firstName: dummyPet.caretakerFirstName,
-                lastName: dummyPet.caretakerLastName,
-                email: dummyPet.caretakerEmail,
-                phone: dummyPet.caretakerPhone,
-              },
-            },
-            null,
-            2,
-          )}
+        <dl>
+          <dt><strong>First Name:</strong></dt>
+          <dd>${dummyPet.caretakerFirstName}</dd>
+    
+          <dt><strong>Last Name:</strong></dt>
+          <dd>${dummyPet.caretakerLastName}</dd>
+
+          <dt><strong>Email:</strong></dt>
+          <dd>${dummyPet.caretakerEmail}</dd>
+
+          <dt><strong>Phone Number:</strong></dt>
+          <dd>${dummyPet.caretakerPhone}</dd>
+
+          <dt><strong>Date Created:</strong></dt>
+          <dd>${dummyPet.dateCreated}</dd>
+    
+         </dl>
         </div>
       </div>
       <div class="fixed bottom-6 right-6 flex gap-2">
