@@ -3,7 +3,7 @@ const user = JSON.parse(localStorage.getItem('user'));
 
 // If the user is not logged in, redirect to the sign-in page
 //if (!user) {
-  //window.location.href = '/sign-in';
+//window.location.href = '/sign-in';
 //}
 
 // Allows html to be formatted with Prettier
@@ -83,7 +83,6 @@ const cardGrid = document.querySelector('#card-grid');
 
 // For each pet, create a card
 const cards = dummyPets.map((dummyPet) => {
-
   // sets image to what type of animal it is
   let imageSrc;
 
@@ -94,37 +93,37 @@ const cards = dummyPets.map((dummyPet) => {
       imageSrc = '/assets/pet_images/dog.jpg';
       altText = 'Image of a dog representing dog pets';
       break;
-    
+
     // for cats
     case 'cat':
       imageSrc = '/assets/pet_images/cat.jpg';
       altText = 'Image of standard issue cat, representing cat pets';
       break;
-    
+
     // for birds
     case 'bird':
       imageSrc = 'path/to/bird-image.jpg';
       altText = 'Image of a colorful parrot, representing bird pets';
       break;
-    
+
     // for sharks
     case 'shark':
       imageSrc = '/assets/pet_images/shark.jpg';
       altText = 'Image of a shark, representing shark pets';
       break;
-    
+
     // for fish
     case 'fish':
       imageSrc = '/assets/pet_images/fish.jpg';
       altText = 'Image of a gold fish, representing fish pets';
       break;
-    
+
     // for reptiles
     case 'reptile':
       imageSrc = '/assets/pet_images/reptile.jpg';
       altText = 'Image of a snake representing reptile pets';
       break;
-    
+
     // it was not a case or is an other type
     default:
       // Default image for unknown types
@@ -256,7 +255,6 @@ addPetButton.addEventListener('click', () => {
 // adds pet based on form
 async function addPet(pet) {
   try {
-    
     const apiUrl = '/api/add-pet.php';
 
     const response = await fetch(apiUrl, {
@@ -275,11 +273,11 @@ async function addPet(pet) {
     if (data.error) {
       // triggers when connected, but server gives error
       console.error('Error deleting pet:', data.error);
-  } else {
+    } else {
       // success in terms of reaching the API
       console.log('Pet added successfully:', result);
       hideModal();
-  }
+    }
   } catch (error) {
     // Server fails to connect or send data
     console.error('Error adding pet:', error.message);
@@ -289,7 +287,6 @@ async function addPet(pet) {
 // updates pet information
 async function editPet(pet) {
   try {
-    
     const apiUrl = '/api/update-pet.php';
 
     const response = await fetch(apiUrl, {
@@ -308,11 +305,11 @@ async function editPet(pet) {
     if (data.error) {
       // triggers when connected, but server gives error
       console.error('Error deleting pet:', data.error);
-  } else {
+    } else {
       // success in terms of reaching the API
       console.log('Pet added successfully:', result);
       hideModal();
-  }
+    }
   } catch (error) {
     // Server fails to connect or send data
     console.error('Error adding pet:', error.message);
@@ -324,12 +321,12 @@ async function deletePet(petId) {
   try {
     // calls the pet delete api
     const response = await fetch('/api/delete-pet.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        // sends pet id to the php call to delete the right pet
-        body: JSON.stringify({ id: petId }),
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // sends pet id to the php call to delete the right pet
+      body: JSON.stringify({ id: petId }),
     });
 
     // waits for response from server
@@ -337,18 +334,17 @@ async function deletePet(petId) {
 
     // Check for errors or success
     if (data.error) {
-        // triggers when connected, but server gives error
-        console.error('Error deleting pet:', data.error);
+      // triggers when connected, but server gives error
+      console.error('Error deleting pet:', data.error);
     } else {
-        // success in terms of reaching the API
-        console.log('Pet deleted successfully. Deleted Pet ID:', data.deleted_pet_id);
-        hideModal();
+      // success in terms of reaching the API
+      console.log('Pet deleted successfully. Deleted Pet ID:', data.deleted_pet_id);
+      hideModal();
     }
     // error when reaching server or other things
-} catch (error) {
+  } catch (error) {
     console.error('Error during deletePet function:', error);
-}
-
+  }
 }
 
 // Purpose must be 'add', 'edit', or 'delete'
@@ -370,13 +366,13 @@ function showModal(purpose, data) {
       <div class="flex justify-end gap-4">
         <button
           onclick="hideModal()"
-          class=" rounded-md border border-main-text-color px-4 py-2 text-main-text-color transition hover:underline hover:ring-main-text-color hover:ring-offset-2 hover:ring-offset-main-text-color focus:outline-none focus:ring-2 focus:ring-main-text-color focus:underline focus:ring-offset-2 focus:ring-offset-white"
+          class=" rounded-md border border-main-text-color px-4 py-2 text-main-text-color transition hover:underline hover:ring-main-text-color hover:ring-offset-2 hover:ring-offset-main-text-color focus:underline focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-white"
         >
           Cancel
         </button>
         <button
           onclick="deletePet(${data})"
-          class="rounded-md border border-[#B40100] bg-[#B40100] px-4 py-2 text-white transition hover:ring-2 hover:ring-[#B40100] hover:ring-offset-2 hover:ring-offset-[#B40100] hover:underline focus:ring-2 focus:ring-[#B40100] focus:underline focus:ring-offset-2 focus:ring-offset-[#B40100]"
+          class="rounded-md border border-[#B40100] bg-[#B40100] px-4 py-2 text-white transition hover:underline hover:ring-2 hover:ring-[#B40100] hover:ring-offset-2 hover:ring-offset-[#B40100] focus:underline focus:ring-2 focus:ring-[#B40100] focus:ring-offset-2 focus:ring-offset-[#B40100]"
         >
           Delete
         </button>
@@ -454,7 +450,7 @@ function showModal(purpose, data) {
           name="caretakerEmail"
           placeholder="caretaker email"
           type="email"
-          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}"
           title="Enter a valid email address"
           required
           ${purpose === 'edit' ? `value="${data.caretakerEmail}"` : ''}
