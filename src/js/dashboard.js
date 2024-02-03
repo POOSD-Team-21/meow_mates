@@ -309,7 +309,7 @@ async function editPet(pet) {
 }
 
 // deletes the pet
-async function deletePet(id) {
+async function deletePet(petId) {
   try {
     // calls the pet delete api
     const response = await fetch('/api/delete-pet.php', {
@@ -359,13 +359,13 @@ function showModal(purpose, data) {
       <div class="flex justify-end gap-4">
         <button
           onclick="hideModal()"
-          class=" rounded-md border border-main-text-color px-4 py-2 text-main-text-color transition hover:bg-zinc-100 focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-white"
+          class=" rounded-md border border-main-text-color px-4 py-2 text-main-text-color transition hover:underline hover:ring-main-text-color hover:ring-offset-2 hover:ring-offset-main-text-color focus:outline-none focus:ring-2 focus:ring-main-text-color focus:underline focus:ring-offset-2 focus:ring-offset-white"
         >
           Cancel
         </button>
         <button
           onclick="deletePet(${data})"
-          class="rounded-md border border-red-500 bg-red-500 px-4 py-2 text-white transition hover:bg-red-500/90 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white"
+          class="rounded-md border border-[#B40100] bg-[#B40100] px-4 py-2 text-white transition hover:ring-2 hover:ring-[#B40100] hover:ring-offset-2 hover:ring-offset-[#B40100] hover:underline focus:ring-2 focus:ring-[#B40100] focus:underline focus:ring-offset-2 focus:ring-offset-[#B40100]"
         >
           Delete
         </button>
