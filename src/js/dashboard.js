@@ -2,9 +2,9 @@
 const user = JSON.parse(localStorage.getItem('user'));
 
 // If the user is not logged in, redirect to the sign-in page
-//if (!user) {
-  //window.location.href = '/sign-in';
-//}
+if (!user) {
+  window.location.href = '/sign-in';
+}
 
 // Allows html to be formatted with Prettier
 const html = String.raw;
@@ -350,7 +350,7 @@ function showModal(purpose, data) {
           name="petType"
           class="rounded-md border border-main-text-color px-4 py-2 shadow-md transition placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-white"
         >
-          ${['dog', 'cat', 'bird', 'fish', 'reptile', 'other'].map(
+          ${['dog', 'cat', 'bird', 'fish', 'reptile', 'shark', 'other'].map(
             (type) => html`
               <option value="${type}" ${purpose === 'edit' && data.type === type ? 'selected' : ''}>
                 ${type.charAt(0).toUpperCase() + type.slice(1)}
