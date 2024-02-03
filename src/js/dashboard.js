@@ -400,6 +400,7 @@ function showModal(purpose, data) {
           name="petFirst"
           placeholder="pet first name"
           type="text"
+          required
           ${purpose === 'edit' ? `value="${data.firstName}"` : ''}
         />
         <label for="petLast" class="text-base">Pet Last Name</label>
@@ -409,6 +410,7 @@ function showModal(purpose, data) {
           name="petLast"
           placeholder="pet last name"
           type="text"
+          required
           ${purpose === 'edit' ? `value="${data.lastName}"` : ''}
         />
         <label for="first" class="text-base">Pet Type</label>
@@ -432,6 +434,7 @@ function showModal(purpose, data) {
           name="caretakerFirst"
           placeholder="caretaker first name"
           type="text"
+          required
           ${purpose === 'edit' ? `value="${data.caretakerFirstName}"` : ''}
         />
         <label for="caretakerLast" class="text-base">Caretaker Last Name</label>
@@ -441,6 +444,7 @@ function showModal(purpose, data) {
           name="caretakerLast"
           placeholder="caretaker last name"
           type="text"
+          required
           ${purpose === 'edit' ? `value="${data.caretakerLastName}"` : ''}
         />
         <label for="caretakerEmail" class="text-base">Caretaker Email</label>
@@ -449,7 +453,10 @@ function showModal(purpose, data) {
           id="caretakerEmail"
           name="caretakerEmail"
           placeholder="caretaker email"
-          type="text"
+          type="email"
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+          title="Enter a valid email address"
+          required
           ${purpose === 'edit' ? `value="${data.caretakerEmail}"` : ''}
         />
         <label for="caretakerPhone" class="text-base">Caretaker Phone</label>
@@ -458,7 +465,10 @@ function showModal(purpose, data) {
           id="caretakerPhone"
           name="caretakerPhone"
           placeholder="caretaker phone"
-          type="text"
+          type="tel"
+          pattern="[0-9]{10}"
+          title="Enter a 10-digit phone number. Ex: 1234567891"
+          required
           ${purpose === 'edit' ? `value="${data.caretakerPhone}"` : ''}
         />
         <button
