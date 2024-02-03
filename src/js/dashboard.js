@@ -219,10 +219,37 @@ async function addPet(pet) {
   }
 }
 
-function editPet(pet) {
-  // TODO: implement
-  console.log(pet);
-  // hideModal();
+// updates pet information
+async function editPet(pet) {
+  try {
+    
+    const apiUrl = '/api/update-pet.php';
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+
+      // sends the form data to the server
+      body: JSON.stringify(pet),
+    });
+
+    const result = await response.json();
+
+    // Check for errors or success
+    if (data.error) {
+      // triggers when connected, but server gives error
+      console.error('Error deleting pet:', data.error);
+  } else {
+      // success in terms of reaching the API
+      console.log('Pet added successfully:', result);
+      hideModal();
+  }
+  } catch (error) {
+    // Server fails to connect or send data
+    console.error('Error adding pet:', error.message);
+  }
 }
 
 // deletes the pet
