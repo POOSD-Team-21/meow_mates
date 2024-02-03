@@ -198,10 +198,36 @@ function editPet(pet) {
   // hideModal();
 }
 
-function deletePet(id) {
-  // TODO: implement
-  console.log(id);
-  // hideModal();
+// deletes the pet
+async function deletePet(id) {
+  try {
+    // calls the pet delete api
+    const response = await fetch('/api/delete-pet.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // sends pet id to the php call to delete the right pet
+        body: JSON.stringify({ id: petId }),
+    });
+
+    // waits for response from server
+    const data = await response.json();
+
+    // Check for errors or success
+    if (data.error) {
+        // triggers when connected, but server gives error
+        console.error('Error deleting pet:', data.error);
+    } else {
+        // success in terms of reaching the API
+        console.log('Pet deleted successfully. Deleted Pet ID:', data.deleted_pet_id);
+        hideModal();
+    }
+    // error when reaching server or other things
+} catch (error) {
+    console.error('Error during deletePet function:', error);
+}
+
 }
 
 // Purpose must be 'add', 'edit', or 'delete'
