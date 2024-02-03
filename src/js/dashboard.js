@@ -116,7 +116,7 @@ const cards = dummyPets.map((dummyPet) => {
       <div class="fixed bottom-6 right-6 flex gap-2">
         <button
           onclick="event.stopPropagation(); showModal('delete', ${dummyPet.id})"
-          class="z-40 rounded-md bg-red-500 p-2 text-white shadow-md transition-all hover:bg-red-500/90 focus:outline-none  focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white group-hover:-translate-y-2"
+          class="z-40 rounded-md bg-[#B40100] p-2 text-white shadow-md transition-all hover:bg-red-500/90 focus:outline-none  focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white group-hover:-translate-y-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +139,7 @@ const cards = dummyPets.map((dummyPet) => {
         </button>
         <button
           onclick="event.stopPropagation(); showModal('edit', ${JSON.stringify(dummyPet).replace(/"/g, '&quot;')})"
-          class="z-40 rounded-md bg-orange-500 p-2 text-white shadow transition-all hover:bg-orange-500/90 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white group-hover:-translate-y-2"
+          class="z-40 rounded-md bg-main-text-color p-2 text-white shadow transition-all hover:bg-orange-500/90 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white group-hover:-translate-y-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
