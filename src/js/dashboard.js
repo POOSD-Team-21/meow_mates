@@ -2,9 +2,9 @@
 const user = JSON.parse(localStorage.getItem('user'));
 
 // If the user is not logged in, redirect to the sign-in page
-if (!user) {
-  window.location.href = '/sign-in';
-}
+//if (!user) {
+  //window.location.href = '/sign-in';
+//}
 
 // Allows html to be formatted with Prettier
 const html = String.raw;
@@ -116,7 +116,7 @@ const cards = dummyPets.map((dummyPet) => {
       <div class="fixed bottom-6 right-6 flex gap-2">
         <button
           onclick="event.stopPropagation(); showModal('delete', ${dummyPet.id})"
-          class="z-40 rounded-md bg-[#B40100] p-2 text-white shadow-md transition-all hover:bg-red-500/90 focus:outline-none  focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white group-hover:-translate-y-2"
+          class="z-40 rounded-md bg-[#B40100] p-2 text-white shadow-md transition-all hover:ring-2 hover:ring-[#B40100] hover:ring-offset-2 hover:ring-offset-[#B40100] focus:ring-2 focus:ring-[#B40100] focus:ring-offset-2 focus:ring-offset-[#B40100] group-hover:-translate-y-2""
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +139,7 @@ const cards = dummyPets.map((dummyPet) => {
         </button>
         <button
           onclick="event.stopPropagation(); showModal('edit', ${JSON.stringify(dummyPet).replace(/"/g, '&quot;')})"
-          class="z-40 rounded-md bg-main-text-color p-2 text-white shadow transition-all hover:bg-orange-500/90 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-white group-hover:-translate-y-2"
+          class="z-40 rounded-md bg-main-text-color p-2 text-white shadow transition-all hover:ring-2 hover:ring-main-text-color hover:ring-offset-2 hover:ring-offset-main-text-color focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-text-color group-hover:-translate-y-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
