@@ -2,9 +2,9 @@
 const user = JSON.parse(localStorage.getItem('user'));
 
 // If the user is not logged in, redirect to the sign-in page
-if (!user) {
-  window.location.href = '/sign-in';
-}
+//if (!user) {
+  //window.location.href = '/sign-in';
+//}
 
 // Allows html to be formatted with Prettier
 const html = String.raw;
@@ -83,6 +83,48 @@ const cardGrid = document.querySelector('#card-grid');
 
 // For each pet, create a card
 const cards = dummyPets.map((dummyPet) => {
+
+  // sets image to what type of animal it is
+  let imageSrc;
+
+  // for each image, based on type uses the correct image for it
+  switch (dummyPet.type) {
+    // for dogs
+    case 'dog':
+      imageSrc = '/assets/pet_images/dog.jpg';
+      break;
+    
+    // for cats
+    case 'cat':
+      imageSrc = '/assets/pet_images/cat.jpg';
+      break;
+    
+    // for birds
+    case 'bird':
+      imageSrc = 'path/to/bird-image.jpg';
+      break;
+    
+    // for sharks
+    case 'shark':
+      imageSrc = '/assets/pet_images/shark.jpg';
+      break;
+    
+    // for fish
+    case 'fish':
+      imageSrc = '/assets/pet_images/fish.jpg';
+      break;
+    
+    // for reptiles
+    case 'reptile':
+      imageSrc = '/assets/pet_images/reptile.jpg';
+      break;
+    
+    // it was not a case or is an other type
+    default:
+      // Default image for unknown types
+      imageSrc = '/assets/pet_images/other.jpg';
+  }
+
   return html`
     <div class="group h-full w-full" style="perspective: 1000px" onclick="flip(this.children[0])">
       <div
@@ -189,6 +231,7 @@ addPetButton.addEventListener('click', () => {
 // adds pet based on form
 async function addPet(pet) {
   try {
+    
     const apiUrl = '/api/add-pet.php';
 
     const response = await fetch(apiUrl, {
@@ -207,11 +250,11 @@ async function addPet(pet) {
     if (data.error) {
       // triggers when connected, but server gives error
       console.error('Error deleting pet:', data.error);
-    } else {
+  } else {
       // success in terms of reaching the API
       console.log('Pet added successfully:', result);
       hideModal();
-    }
+  }
   } catch (error) {
     // Server fails to connect or send data
     console.error('Error adding pet:', error.message);
@@ -221,6 +264,7 @@ async function addPet(pet) {
 // updates pet information
 async function editPet(pet) {
   try {
+    
     const apiUrl = '/api/update-pet.php';
 
     const response = await fetch(apiUrl, {
@@ -239,11 +283,11 @@ async function editPet(pet) {
     if (data.error) {
       // triggers when connected, but server gives error
       console.error('Error deleting pet:', data.error);
-    } else {
+  } else {
       // success in terms of reaching the API
       console.log('Pet added successfully:', result);
       hideModal();
-    }
+  }
   } catch (error) {
     // Server fails to connect or send data
     console.error('Error adding pet:', error.message);
@@ -255,12 +299,12 @@ async function deletePet(id) {
   try {
     // calls the pet delete api
     const response = await fetch('/api/delete-pet.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // sends pet id to the php call to delete the right pet
-      body: JSON.stringify({ id: petId }),
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        // sends pet id to the php call to delete the right pet
+        body: JSON.stringify({ id: petId }),
     });
 
     // waits for response from server
@@ -268,17 +312,18 @@ async function deletePet(id) {
 
     // Check for errors or success
     if (data.error) {
-      // triggers when connected, but server gives error
-      console.error('Error deleting pet:', data.error);
+        // triggers when connected, but server gives error
+        console.error('Error deleting pet:', data.error);
     } else {
-      // success in terms of reaching the API
-      console.log('Pet deleted successfully. Deleted Pet ID:', data.deleted_pet_id);
-      hideModal();
+        // success in terms of reaching the API
+        console.log('Pet deleted successfully. Deleted Pet ID:', data.deleted_pet_id);
+        hideModal();
     }
     // error when reaching server or other things
-  } catch (error) {
+} catch (error) {
     console.error('Error during deletePet function:', error);
-  }
+}
+
 }
 
 // Purpose must be 'add', 'edit', or 'delete'
