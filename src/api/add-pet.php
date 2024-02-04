@@ -15,12 +15,13 @@ $body = get_request_body();
 error_log('Received data: ' . print_r($body, true));
 
 $userid = $body['userid'];
-$type = $body['type'];
-$first = $body['first'];
-$last = ($body['last'] === NULL || $body['last'] === '') ? '' : $body['last'];
-$caretakeid = $body['caretakeid'];
-$age = $body['age'];
-$descr = ($body['last'] === NULL || $body['last'] === '') ? NULL : $body['last'];
+$first = $body['petFirst'];
+$last = ($body['petLast'] === NULL || $body['petLast'] === '') ? '' : $body['petLast'];
+$type = $body['petType'];
+$careFirst = $body['caretakerFirst'];
+$careLast = $body['caretakerLast'];
+$email = $body['caretakerEmail'];
+$phone = $body['caretakerPhone'];
 
 $connection = new mysqli($host, $user, $dbPassword, $database);
 
@@ -30,7 +31,7 @@ if ($connection->connect_error) {
     exit;
 }
 
-$query = "INSERT INTO PETS (`USERID`,`TYPE`,`FIRST`,`LAST`,`CARETAKEID`,`AGE`,`DESCR`) VALUES (?,?,?,?,?,?,?)";
+$query = "INSERT INTO PETS (`USERID`,`FIRST`,`LAST`,`TYPE`,`CARETAKER_FIRST`,`CARETAKER_LAST`,`EMAIL`,`PHONE`) VALUES (?,?,?,?,?,?,?,?)";
 
 $statement = $connection->prepare($query);
 
@@ -40,7 +41,7 @@ if (!$statement) {
     exit;
 }
 
-$statement->bind_param('sssssss', $userid,$type,$first,$last,$caretakeid,$age,$descr);
+$statement->bind_param('isssssss', $userid,$first,$last,$type,$careFirst,$careLast,$email,$phone);
 
 if (!$statement->execute()) {
     error_log('Execute statement error: ' . $statement->error);
