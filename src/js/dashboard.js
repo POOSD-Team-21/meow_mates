@@ -505,11 +505,13 @@ function showModal(purpose, data) {
   });
 
   // Pressing the escape key should close the modal
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      hideModal();
-    }
-  });
+  document.addEventListener('keydown', hideOnEscape);
+}
+
+function hideOnEscape(event) {
+  if (event.key === 'Escape') {
+    hideModal();
+  }
 }
 
 function hideModal() {
@@ -540,6 +542,9 @@ function hideModal() {
   bodyChildren.forEach((child) => {
     child.removeAttribute('inert');
   });
+
+  // Remove the escape key listener
+  document.removeEventListener('keydown', hideOnEscape);
 }
 
 /* Search related code */
