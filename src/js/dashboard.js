@@ -386,7 +386,7 @@ function showModal(purpose, data) {
       <form
         class="mx-auto flex w-[350px] flex-col gap-2"
         onsubmit="event.preventDefault(); ${purpose === 'add'
-          ? 'addPet(Object.fromEntries(new FormData(this)))'
+          ? `addPet({ userid: ${JSON.parse(localStorage.getItem('user')).id}, ...Object.fromEntries(new FormData(this)) })`
           : `editPet({ id: ${data.id}, ...Object.fromEntries(new FormData(this)) })`}"
       >
         <label for="petFirst" class="text-base">Pet First Name</label>
