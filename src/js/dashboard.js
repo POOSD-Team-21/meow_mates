@@ -471,7 +471,7 @@ function showModal(purpose, data) {
           class="mt-2 rounded-md bg-main-text-color px-4 py-2 font-semibold text-white shadow-md outline-none transition duration-300 hover:bg-main-text-color/90 focus:ring-2 focus:ring-main-text-color focus:ring-offset-2"
           type="submit"
         >
-          Sign Up
+          Add pet
         </button>
       </form>
     `;
