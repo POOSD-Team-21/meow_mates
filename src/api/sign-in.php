@@ -12,6 +12,29 @@ $body = get_request_body();
 $login = $body['login'];
 $enteredPassword = $body['password'];
 
+function isStrongPassword($password) {
+    // Define password complexity rules
+    $minLength = 8;
+    $hasUppercase = preg_match('/[A-Z]/', $password);
+    $hasLowercase = preg_match('/[a-z]/', $password);
+    $hasDigit = preg_match('/\d/', $password);
+    $hasSpecialChar = preg_match('/[^A-Za-z0-9]/', $password);
+
+    // Check if all rules are met
+    if (!(
+        strlen($password) >= $minLength &&
+        $hasUppercase &&
+        $hasLowercase &&
+        $hasDigit &&
+        $hasSpecialChar)
+    ) {
+    send_json(json_encode(array('error' => "Password does not meet complexity requirements.")));
+    exit;
+    } else {
+        return false; // Password does not meet complexity requirements
+    }
+}
+
 $connection = new mysqli($host, $user, $dbPassword, $database);
 
 if ($connection->connect_error) {

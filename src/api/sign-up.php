@@ -27,6 +27,11 @@ $last = ($body['last'] === NULL || $body['last'] === '') ? '' : $body['last'];
 $email = ($body['email'] === NULL || $body['email'] === '') ? NULL : $body['email'];
 $phone = ($body['phone'] === NULL || $body['phone'] === '') ? NULL : $body['phone'];
 
+if(!isStrongPassword($enteredPassword)) {
+    send_json(json_encode(array('error' => "Password does not meet complexity requirements.")));
+    exit;
+}
+
 
 $connection = new mysqli($host, $user, $dbPassword, $database);
 
@@ -102,6 +107,26 @@ function loadEnv($filePath)
     }
 
     error_log('Finished loading .env file');
+}
+
+function isStrongPassword($password) {
+    $minLength = 8;
+    $hasUppercase = preg_match('/[A-Z]/', $password);
+    $hasLowercase = preg_match('/[a-z]/', $password);
+    $hasDigit = preg_match('/\d/', $password);
+    $hasSpecialChar = preg_match('/[^A-Za-z0-9]/', $password);
+
+    if (!(
+        strlen($password) >= $minLength &&
+        $hasUppercase &&
+        $hasLowercase &&
+        $hasDigit &&
+        $hasSpecialChar)
+    ) {
+		return false;
+    } else {
+        return true;
+    }
 }
 
 function is_username_taken($connection, $username)
