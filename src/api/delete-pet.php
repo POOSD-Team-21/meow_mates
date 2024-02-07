@@ -16,19 +16,28 @@ $conn = new mysqli($host, $user, $dbPassword, $database);
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
+    // Log received data
+    error_log('Received data: ' . print_r($inData, true));
+    
     $query = "DELETE FROM PETS WHERE INTNUM = ?";
     $stmt = $conn->prepare($query);
     
     if ($stmt) {
+        // Log SQL query
+        error_log('SQL Query: ' . $query);
+        
         $stmt->bind_param('i', $intnum);
         $stmt->execute();
         
-        $deletedPetId = $conn->insert_id; // Get the ID of the deleted pet
-        
-        $stmt->close();
-        $conn->close();
-        
-        returnWithSuccess($deletedPetId);
+        if ($stmt->affected_rows > 0) {
+            $deletedPetId = $intnum; // Since we know the ID of the deleted pet
+            $stmt->close();
+            $conn->close();
+            returnWithSuccess($deletedPetId);
+        } else {
+            // No rows affected, possibly the pet with the given ID doesn't exist
+            returnWithError("No pet found with ID: " . $intnum);
+        }
     } else {
         returnWithError("Delete statement preparation error: " . $conn->error);
     }
@@ -47,12 +56,18 @@ function sendResultInfoAsJson($obj)
 
 function returnWithError($err)
 {
+    // Log the error
+    error_log('Error: ' . $err);
+    
     $retValue = ['error' => $err];
     sendResultInfoAsJson($retValue);
 }
 
 function returnWithSuccess($deletedPetId)
 {
+    // Log success message
+    error_log('Pet deleted successfully. ID: ' . $deletedPetId);
+    
     $retValue = ['message' => 'Pet deleted successfully', 'deleted_pet_id' => $deletedPetId];
     sendResultInfoAsJson($retValue);
 }
@@ -80,3 +95,4 @@ function loadEnv($filePath)
     }
 }
 ?>
+
