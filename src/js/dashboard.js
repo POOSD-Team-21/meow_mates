@@ -571,3 +571,10 @@ searchInput.addEventListener(
     // TODO: implement search
   }, 500),
 );
+
+
+// signs user out
+signOutButton.addEventListener('click', () => {
+  localStorage.removeItem('user');
+  window.location.href = '/sign-in';
+});
