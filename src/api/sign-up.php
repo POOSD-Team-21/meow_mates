@@ -27,7 +27,7 @@ $last = ($body['last'] === NULL || $body['last'] === '') ? '' : $body['last'];
 $email = ($body['email'] === NULL || $body['email'] === '') ? NULL : $body['email'];
 $phone = ($body['phone'] === NULL || $body['phone'] === '') ? NULL : $body['phone'];
 
-if(!isStrongPassword($enteredPassword)) {
+if (!isStrongPassword($body['password'])) {
     send_json(json_encode(array('error' => "Password does not meet complexity requirements.")));
     exit;
 }
