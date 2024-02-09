@@ -148,7 +148,8 @@ const cards = listOfPets.map((userPets) => {
         <div
           class="absolute h-full w-full overflow-hidden rounded-md border border-main-text-color bg-white p-6 text-main-text-color shadow-md rotate-y-180 backface-hidden"
         >
-        <dl>
+        <h1 class="text-center"><strong>Caretaker Info</strong><h1>
+        <dl class="">
           <dt><strong>First Name:</strong></dt>
           <dd>${dummyPet.caretakerFirstName}</dd>
     
