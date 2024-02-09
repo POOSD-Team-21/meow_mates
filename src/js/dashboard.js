@@ -13,9 +13,8 @@ if (!user) {
 // Allows html to be formatted with Prettier
 const html = String.raw;
 
-// api get pet call 
-async function getPets(userId)
-{
+// api get pet call
+async function getPets(userId) {
   try {
     // calls the generate pet api
     const response = await fetch('/api/generate-pet.php', {
