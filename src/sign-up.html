@@ -103,6 +103,8 @@
             name="password"
             placeholder="password"
             type="password"
+            pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{8,}$"
+            title="Need at least 8 characters, 1 upper, 1 lower, 1 digit, and 1 special character"
             required
           />
         </div>
