@@ -14,8 +14,14 @@ if (!user) {
 const html = String.raw;
 
 // api get pet call
-async function getPets(userId) {
+async function getPets(id) {
   try {
+
+    // prepares payload with variable first
+    const payload = {
+      userid: id
+    };
+    
     // calls the generate pet api
     const response = await fetch('/api/generate-pet.php', {
       method: 'POST',
@@ -23,7 +29,7 @@ async function getPets(userId) {
         'Content-Type': 'application/json',
       },
       // sends user id to the php call to get the right pets from user
-      body: JSON.stringify({ id: userId }),
+      body: JSON.stringify(payload),
     });
 
     // waits for response from server
@@ -33,18 +39,29 @@ async function getPets(userId) {
     if (data.error) {
       // triggers when connected, but server gives error
       console.error('Error Getting Pets:', data.error);
+      console.log(data.error)
+      if (data.error.trim === "No results found.") {
+        // returns null since no results found
+        return null;
+      }
+      else {
+        // returns undefined when an error occurred
+        return undefined;
+      }
+
     } else {
       // success in terms of reaching the API
       console.log('Pets Obtained Successfully.');
-      hideModal();
     }
+
+    // otherwise we return the data
+    return data;
+    
     // error when reaching server or other things
   } catch (error) {
     console.error('Error during getPets function:', error);
+    return undefined;
   }
-
-  // otherwise we return the data
-  return data;
 }
 
 // NOTE: Do not use comments in the html template literals
@@ -64,17 +81,36 @@ function flip(card) {
 
 // Grab the card grid where we will display the pet cards
 const cardGrid = document.querySelector('#card-grid');
-
+const notCards = document.querySelector('#not-cards');
+console.log(user);
 // calls getPets to get the list of pets with user info
-userPets = getPets(user);
+getPets(user).then((userPets) => {
+// holds the cards created by the pet
+let cards;
+let nullUndefinedHTMLMessage;
 
-// For each pet, create a card
-const cards = listOfPets.map((userPets) => {
+// when pets are null we have no pets, so display logo
+if (userPets == null) {
+  nullUndefinedHTMLMessage = [html`
+      <img src="/assets/MeowMatesCenteredBlueBackground.png" alt="Dog and Cat with words MeowMates in front with blue background" class="w-32 h-32" />
+  `];
+}
+else if (userPets == undefined)
+{
+  // then this means we have an error, so display error message
+  nullUndefinedHTMLMessage = [html`
+      <p>&#x26A0; Error: Couldn't access pets data, see log for details!</p>
+  `];
+}
+// means the card data was pulled successfully
+else {
+  // For each pet, create a card
+  cards = listOfPets.map((userPets) => {
   // sets image to what type of animal it is
   let imageSrc;
 
   // for each image, based on type uses the correct image for it
-  switch (dummyPet.type) {
+  switch (userPet.type) {
     // for dogs
     case 'dog':
       imageSrc = '/assets/pet_images/dog.jpg';
@@ -136,10 +172,10 @@ const cards = listOfPets.map((userPets) => {
         </div>
         <dl>
           <dt><strong>First Name:</strong></dt>
-          <dd>${dummyPet.firstName}</dd>
+          <dd>${userPet.firstName}</dd>
     
           <dt><strong>Last Name:</strong></dt>
-          <dd>${dummyPet.lastName}</dd>
+          <dd>${userPet.lastName}</dd>
     
          </dl>
       </div>
@@ -150,26 +186,26 @@ const cards = listOfPets.map((userPets) => {
         <h1 class="text-center"><strong>Caretaker Info</strong><h1>
         <dl class="">
           <dt><strong>First Name:</strong></dt>
-          <dd>${dummyPet.caretakerFirstName}</dd>
+          <dd>${userPet.caretakerFirstName}</dd>
     
           <dt><strong>Last Name:</strong></dt>
-          <dd>${dummyPet.caretakerLastName}</dd>
+          <dd>${userPet.caretakerLastName}</dd>
 
           <dt><strong>Email:</strong></dt>
-          <dd>${dummyPet.caretakerEmail}</dd>
+          <dd>${userPet.caretakerEmail}</dd>
 
           <dt><strong>Phone Number:</strong></dt>
-          <dd>${dummyPet.caretakerPhone}</dd>
+          <dd>${userPet.caretakerPhone}</dd>
 
           <dt><strong>Date Created:</strong></dt>
-          <dd>${dummyPet.dateCreated}</dd>
+          <dd>${userPet.dateCreated}</dd>
     
          </dl>
         </div>
       </div>
       <div class="fixed bottom-6 right-6 flex gap-2">
         <button
-          onclick="event.stopPropagation(); showModal('delete', ${dummyPet.id})"
+          onclick="event.stopPropagation(); showModal('delete', ${userPet.id})"
           class="z-40 rounded-md bg-[#B40100] p-2 text-white shadow-md transition-all hover:ring-2 hover:ring-[#B40100] hover:ring-offset-2 hover:ring-offset-[#B40100] focus:ring-2 focus:ring-[#B40100] focus:ring-offset-2 focus:ring-offset-[#B40100] group-hover:-translate-y-2""
         >
           <svg
@@ -192,7 +228,7 @@ const cards = listOfPets.map((userPets) => {
           </svg>
         </button>
         <button
-          onclick="event.stopPropagation(); showModal('edit', ${JSON.stringify(dummyPet).replace(/"/g, '&quot;')})"
+          onclick="event.stopPropagation(); showModal('edit', ${JSON.stringify(userPet).replace(/"/g, '&quot;')})"
           class="z-40 rounded-md bg-main-text-color p-2 text-white shadow transition-all hover:ring-2 hover:ring-main-text-color hover:ring-offset-2 hover:ring-offset-main-text-color focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-text-color group-hover:-translate-y-2"
         >
           <svg
@@ -215,9 +251,17 @@ const cards = listOfPets.map((userPets) => {
     </div>
   `;
 });
+}
+// when userPets are null or undefined we put code in a different div
+if (userPets == null || userPets == undefined) {
+  notCards.innerHTML = nullUndefinedHTMLMessage.join('');
+}
+else {
+  // Insert the cards into the card grid
+  cardGrid.innerHTML = cards.join('');
+}
 
-// Insert the cards into the card grid
-cardGrid.innerHTML = cards.join('');
+});
 
 if (user) {
   // swaps sign in button with sign out button
@@ -252,7 +296,7 @@ async function addPet(pet) {
       body: JSON.stringify(pet),
     });
 
-    const result = await response.json();
+    const data = await response.json();
 
     // Check for errors or success
     if (data.error) {
@@ -260,7 +304,7 @@ async function addPet(pet) {
       console.error('Error Adding Pet:', data.error);
     } else {
       // success in terms of reaching the API
-      console.log('Pet Added Successfully:', result);
+      console.log('Pet Added Successfully:', data);
       hideModal();
     }
   } catch (error) {
