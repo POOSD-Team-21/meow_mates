@@ -36,15 +36,13 @@ async function getPets() {
     if (data.error) {
       // triggers when connected, but server gives error
       console.error('Error Getting Pets:', data.error);
-      if (data.error.trim === "No results found.") {
+      if (data.error.trim === 'No results found.') {
         // returns null since no results found
         return null;
-      }
-      else {
+      } else {
         // returns undefined when an error occurred
         return undefined;
       }
-
     } else {
       // success in terms of reaching the API
       console.log('Pets Obtained Successfully.');
@@ -52,7 +50,7 @@ async function getPets() {
 
     // otherwise we return the data
     return data;
-    
+
     // error when reaching server or other things
   } catch (error) {
     console.error('Error during getPets function:', error);
@@ -83,77 +81,78 @@ const notCards = document.querySelector('#not-cards');
 function displayPets(user) {
   // calls getPets to get the list of pets with user info
   getPets(user).then((userPets) => {
-  
-  // holds the cards created by the pet
-  let cards;
-  let nullUndefinedHTMLMessage;
-  
-  // when pets are null we have no pets, so display logo
-  if (userPets == null) {
-    nullUndefinedHTMLMessage = [html`
-        <img src="/assets/MeowMatesCenteredBlueBackground.png" alt="Dog and Cat with words MeowMates in front with blue background" class="w-32 h-32" />
-    `];
-  }
-  else if (userPets == undefined)
-  {
-    // then this means we have an error, so display error message
-    nullUndefinedHTMLMessage = [html`
-        <p>&#x26A0; Error: Couldn't access pets data, see log for details!</p>
-    `];
-  }
-  // means the card data was pulled successfully
-  else {
-    // For each pet, create a card
-    cards = userPets.map((userPet) => {
-    // sets image to what type of animal it is
-    let imageSrc;
-  
-    // for each image, based on type uses the correct image for it
-    switch (userPet.type) {
-      // for dogs
-      case 'dog':
-        imageSrc = '/assets/pet_images/dog.jpg';
-        altText = 'Image of a dog representing dog pets';
-        break;
-  
-      // for cats
-      case 'cat':
-        imageSrc = '/assets/pet_images/cat.jpg';
-        altText = 'Image of standard issue cat, representing cat pets';
-        break;
-  
-      // for birds
-      case 'bird':
-        imageSrc = 'path/to/bird-image.jpg';
-        altText = 'Image of a colorful parrot, representing bird pets';
-        break;
-  
-      // for sharks
-      case 'shark':
-        imageSrc = '/assets/pet_images/shark.jpg';
-        altText = 'Image of a shark, representing shark pets';
-        break;
-  
-      // for fish
-      case 'fish':
-        imageSrc = '/assets/pet_images/fish.jpg';
-        altText = 'Image of a gold fish, representing fish pets';
-        break;
-  
-      // for reptiles
-      case 'reptile':
-        imageSrc = '/assets/pet_images/reptile.jpg';
-        altText = 'Image of a snake representing reptile pets';
-        break;
-  
-      // it was not a case or is an other type
-      default:
-        // Default image for unknown types
-        imageSrc = '/assets/pet_images/other.jpg';
-        altText = 'Image of hamster, representing other types of pets.';
+    // holds the cards created by the pet
+    let cards;
+    let nullUndefinedHTMLMessage;
+
+    // when pets are null we have no pets, so display logo
+    if (userPets == null) {
+      nullUndefinedHTMLMessage = [
+        html`
+          <img
+            src="/assets/MeowMatesCenteredBlueBackground.png"
+            alt="Dog and Cat with words MeowMates in front with blue background"
+            class="h-32 w-32"
+          />
+        `,
+      ];
+    } else if (userPets == undefined) {
+      // then this means we have an error, so display error message
+      nullUndefinedHTMLMessage = [html` <p>&#x26A0; Error: Couldn't access pets data, see log for details!</p> `];
     }
-  
-    return html`
+    // means the card data was pulled successfully
+    else {
+      // For each pet, create a card
+      cards = userPets.map((userPet) => {
+        // sets image to what type of animal it is
+        let imageSrc;
+
+        // for each image, based on type uses the correct image for it
+        switch (userPet.type) {
+          // for dogs
+          case 'dog':
+            imageSrc = '/assets/pet_images/dog.jpg';
+            altText = 'Image of a dog representing dog pets';
+            break;
+
+          // for cats
+          case 'cat':
+            imageSrc = '/assets/pet_images/cat.jpg';
+            altText = 'Image of standard issue cat, representing cat pets';
+            break;
+
+          // for birds
+          case 'bird':
+            imageSrc = 'path/to/bird-image.jpg';
+            altText = 'Image of a colorful parrot, representing bird pets';
+            break;
+
+          // for sharks
+          case 'shark':
+            imageSrc = '/assets/pet_images/shark.jpg';
+            altText = 'Image of a shark, representing shark pets';
+            break;
+
+          // for fish
+          case 'fish':
+            imageSrc = '/assets/pet_images/fish.jpg';
+            altText = 'Image of a gold fish, representing fish pets';
+            break;
+
+          // for reptiles
+          case 'reptile':
+            imageSrc = '/assets/pet_images/reptile.jpg';
+            altText = 'Image of a snake representing reptile pets';
+            break;
+
+          // it was not a case or is an other type
+          default:
+            // Default image for unknown types
+            imageSrc = '/assets/pet_images/other.jpg';
+            altText = 'Image of hamster, representing other types of pets.';
+        }
+
+        return html`
       <div class="group h-full w-full" style="perspective: 1000px" onclick="flip(this.children[0])">
         <div
           role="button"
@@ -249,19 +248,17 @@ function displayPets(user) {
         </div>
       </div>
     `;
+      });
+    }
+    // when userPets are null or undefined we put code in a different div
+    if (userPets == null || userPets == undefined) {
+      notCards.innerHTML = nullUndefinedHTMLMessage.join('');
+    } else {
+      // Insert the cards into the card grid
+      cardGrid.innerHTML = cards.join('');
+    }
   });
-  }
-  // when userPets are null or undefined we put code in a different div
-  if (userPets == null || userPets == undefined) {
-    notCards.innerHTML = nullUndefinedHTMLMessage.join('');
-  }
-  else {
-    // Insert the cards into the card grid
-    cardGrid.innerHTML = cards.join('');
-  }
-  
-  });
-} 
+}
 
 // displays pets on page load
 displayPets(user);
