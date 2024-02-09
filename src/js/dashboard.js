@@ -14,14 +14,11 @@ if (!user) {
 const html = String.raw;
 
 // api get pet call
-async function getPets(id) {
+async function getPets() {
   try {
+    let id = JSON.parse(localStorage.getItem('user')).id;
+    let payload = { userid: id };
 
-    // prepares payload with variable first
-    const payload = {
-      userid: id
-    };
-    
     // calls the generate pet api
     const response = await fetch('/api/generate-pet.php', {
       method: 'POST',
@@ -39,7 +36,6 @@ async function getPets(id) {
     if (data.error) {
       // triggers when connected, but server gives error
       console.error('Error Getting Pets:', data.error);
-      console.log(data.error)
       if (data.error.trim === "No results found.") {
         // returns null since no results found
         return null;
@@ -82,186 +78,193 @@ function flip(card) {
 // Grab the card grid where we will display the pet cards
 const cardGrid = document.querySelector('#card-grid');
 const notCards = document.querySelector('#not-cards');
-console.log(user);
-// calls getPets to get the list of pets with user info
-getPets(user).then((userPets) => {
-// holds the cards created by the pet
-let cards;
-let nullUndefinedHTMLMessage;
 
-// when pets are null we have no pets, so display logo
-if (userPets == null) {
-  nullUndefinedHTMLMessage = [html`
-      <img src="/assets/MeowMatesCenteredBlueBackground.png" alt="Dog and Cat with words MeowMates in front with blue background" class="w-32 h-32" />
-  `];
-}
-else if (userPets == undefined)
-{
-  // then this means we have an error, so display error message
-  nullUndefinedHTMLMessage = [html`
-      <p>&#x26A0; Error: Couldn't access pets data, see log for details!</p>
-  `];
-}
-// means the card data was pulled successfully
-else {
-  // For each pet, create a card
-  cards = listOfPets.map((userPets) => {
-  // sets image to what type of animal it is
-  let imageSrc;
-
-  // for each image, based on type uses the correct image for it
-  switch (userPet.type) {
-    // for dogs
-    case 'dog':
-      imageSrc = '/assets/pet_images/dog.jpg';
-      altText = 'Image of a dog representing dog pets';
-      break;
-
-    // for cats
-    case 'cat':
-      imageSrc = '/assets/pet_images/cat.jpg';
-      altText = 'Image of standard issue cat, representing cat pets';
-      break;
-
-    // for birds
-    case 'bird':
-      imageSrc = 'path/to/bird-image.jpg';
-      altText = 'Image of a colorful parrot, representing bird pets';
-      break;
-
-    // for sharks
-    case 'shark':
-      imageSrc = '/assets/pet_images/shark.jpg';
-      altText = 'Image of a shark, representing shark pets';
-      break;
-
-    // for fish
-    case 'fish':
-      imageSrc = '/assets/pet_images/fish.jpg';
-      altText = 'Image of a gold fish, representing fish pets';
-      break;
-
-    // for reptiles
-    case 'reptile':
-      imageSrc = '/assets/pet_images/reptile.jpg';
-      altText = 'Image of a snake representing reptile pets';
-      break;
-
-    // it was not a case or is an other type
-    default:
-      // Default image for unknown types
-      imageSrc = '/assets/pet_images/other.jpg';
-      altText = 'Image of hamster, representing other types of pets.';
+// gets pets from gets pets call and displays each card
+function displayPets(user) {
+  // calls getPets to get the list of pets with user info
+  getPets(user).then((userPets) => {
+  
+  // holds the cards created by the pet
+  let cards;
+  let nullUndefinedHTMLMessage;
+  
+  // when pets are null we have no pets, so display logo
+  if (userPets == null) {
+    nullUndefinedHTMLMessage = [html`
+        <img src="/assets/MeowMatesCenteredBlueBackground.png" alt="Dog and Cat with words MeowMates in front with blue background" class="w-32 h-32" />
+    `];
   }
-
-  return html`
-    <div class="group h-full w-full" style="perspective: 1000px" onclick="flip(this.children[0])">
-      <div
-        role="button"
-        class="flex h-[300px] w-full rounded-md text-left ring-main-text-color transition-all duration-300 transform-style-3d focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-background-color group-hover:-translate-y-2"
-        tabindex="0"
-      >
-      <div class="absolute h-full w-full overflow-hidden rounded-md border border-main-text-color bg-white p-6 text-main-text-color shadow-md backface-hidden flex items-center justify-center">
-      <div class="flex items-center">
-        <div class="mr-8">
-          <img
-            src="${imageSrc}"
-            alt="${altText}"
-            class="w-32 h-32 rounded-full"
-          />
-        </div>
-        <dl>
-          <dt><strong>First Name:</strong></dt>
-          <dd>${userPet.firstName}</dd>
-    
-          <dt><strong>Last Name:</strong></dt>
-          <dd>${userPet.lastName}</dd>
-    
-         </dl>
-      </div>
-    </div>
+  else if (userPets == undefined)
+  {
+    // then this means we have an error, so display error message
+    nullUndefinedHTMLMessage = [html`
+        <p>&#x26A0; Error: Couldn't access pets data, see log for details!</p>
+    `];
+  }
+  // means the card data was pulled successfully
+  else {
+    // For each pet, create a card
+    cards = userPets.map((userPet) => {
+    // sets image to what type of animal it is
+    let imageSrc;
+  
+    // for each image, based on type uses the correct image for it
+    switch (userPet.type) {
+      // for dogs
+      case 'dog':
+        imageSrc = '/assets/pet_images/dog.jpg';
+        altText = 'Image of a dog representing dog pets';
+        break;
+  
+      // for cats
+      case 'cat':
+        imageSrc = '/assets/pet_images/cat.jpg';
+        altText = 'Image of standard issue cat, representing cat pets';
+        break;
+  
+      // for birds
+      case 'bird':
+        imageSrc = 'path/to/bird-image.jpg';
+        altText = 'Image of a colorful parrot, representing bird pets';
+        break;
+  
+      // for sharks
+      case 'shark':
+        imageSrc = '/assets/pet_images/shark.jpg';
+        altText = 'Image of a shark, representing shark pets';
+        break;
+  
+      // for fish
+      case 'fish':
+        imageSrc = '/assets/pet_images/fish.jpg';
+        altText = 'Image of a gold fish, representing fish pets';
+        break;
+  
+      // for reptiles
+      case 'reptile':
+        imageSrc = '/assets/pet_images/reptile.jpg';
+        altText = 'Image of a snake representing reptile pets';
+        break;
+  
+      // it was not a case or is an other type
+      default:
+        // Default image for unknown types
+        imageSrc = '/assets/pet_images/other.jpg';
+        altText = 'Image of hamster, representing other types of pets.';
+    }
+  
+    return html`
+      <div class="group h-full w-full" style="perspective: 1000px" onclick="flip(this.children[0])">
         <div
-          class="absolute h-full w-full overflow-hidden rounded-md border border-main-text-color bg-white p-6 text-main-text-color shadow-md rotate-y-180 backface-hidden"
+          role="button"
+          class="flex h-[300px] w-full rounded-md text-left ring-main-text-color transition-all duration-300 transform-style-3d focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-main-background-color group-hover:-translate-y-2"
+          tabindex="0"
         >
-        <h1 class="text-center"><strong>Caretaker Info</strong><h1>
-        <dl class="">
-          <dt><strong>First Name:</strong></dt>
-          <dd>${userPet.caretakerFirstName}</dd>
-    
-          <dt><strong>Last Name:</strong></dt>
-          <dd>${userPet.caretakerLastName}</dd>
-
-          <dt><strong>Email:</strong></dt>
-          <dd>${userPet.caretakerEmail}</dd>
-
-          <dt><strong>Phone Number:</strong></dt>
-          <dd>${userPet.caretakerPhone}</dd>
-
-          <dt><strong>Date Created:</strong></dt>
-          <dd>${userPet.dateCreated}</dd>
-    
-         </dl>
+        <div class="absolute h-full w-full overflow-hidden rounded-md border border-main-text-color bg-white p-6 text-main-text-color shadow-md backface-hidden flex items-center justify-center">
+        <div class="flex items-center">
+          <div class="mr-8">
+            <img
+              src="${imageSrc}"
+              alt="${altText}"
+              class="w-32 h-32 rounded-full"
+            />
+          </div>
+          <dl>
+            <dt><strong>First Name:</strong></dt>
+            <dd>${userPet.firstName}</dd>
+      
+            <dt><strong>Last Name:</strong></dt>
+            <dd>${userPet.lastName}</dd>
+      
+           </dl>
         </div>
       </div>
-      <div class="fixed bottom-6 right-6 flex gap-2">
-        <button
-          onclick="event.stopPropagation(); showModal('delete', ${userPet.id})"
-          class="z-40 rounded-md bg-[#B40100] p-2 text-white shadow-md transition-all hover:ring-2 hover:ring-[#B40100] hover:ring-offset-2 hover:ring-offset-[#B40100] focus:ring-2 focus:ring-[#B40100] focus:ring-offset-2 focus:ring-offset-[#B40100] group-hover:-translate-y-2""
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-trash-2"
+          <div
+            class="absolute h-full w-full overflow-hidden rounded-md border border-main-text-color bg-white p-6 text-main-text-color shadow-md rotate-y-180 backface-hidden"
           >
-            <path d="M3 6h18" />
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
-            <line x1="10" x2="10" y1="11" y2="17" />
-            <line x1="14" x2="14" y1="11" y2="17" />
-          </svg>
-        </button>
-        <button
-          onclick="event.stopPropagation(); showModal('edit', ${JSON.stringify(userPet).replace(/"/g, '&quot;')})"
-          class="z-40 rounded-md bg-main-text-color p-2 text-white shadow transition-all hover:ring-2 hover:ring-main-text-color hover:ring-offset-2 hover:ring-offset-main-text-color focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-text-color group-hover:-translate-y-2"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="lucide lucide-square-pen"
+          <h1 class="text-center"><strong>Caretaker Info</strong><h1>
+          <dl class="">
+            <dt><strong>First Name:</strong></dt>
+            <dd>${userPet.caretakerFirstName}</dd>
+      
+            <dt><strong>Last Name:</strong></dt>
+            <dd>${userPet.caretakerLastName}</dd>
+  
+            <dt><strong>Email:</strong></dt>
+            <dd>${userPet.caretakerEmail}</dd>
+  
+            <dt><strong>Phone Number:</strong></dt>
+            <dd>${userPet.caretakerPhone}</dd>
+  
+            <dt><strong>Date Created:</strong></dt>
+            <dd>${userPet.dateCreated}</dd>
+      
+           </dl>
+          </div>
+        </div>
+        <div class="fixed bottom-6 right-6 flex gap-2">
+          <button
+            onclick="event.stopPropagation(); showModal('delete', ${userPet.id})"
+            class="z-40 rounded-md bg-[#B40100] p-2 text-white shadow-md transition-all hover:ring-2 hover:ring-[#B40100] hover:ring-offset-2 hover:ring-offset-[#B40100] focus:ring-2 focus:ring-[#B40100] focus:ring-offset-2 focus:ring-offset-[#B40100] group-hover:-translate-y-2""
           >
-            <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-            <path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-trash-2"
+            >
+              <path d="M3 6h18" />
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+              <line x1="10" x2="10" y1="11" y2="17" />
+              <line x1="14" x2="14" y1="11" y2="17" />
+            </svg>
+          </button>
+          <button
+            onclick="event.stopPropagation(); showModal('edit', ${JSON.stringify(userPet).replace(/"/g, '&quot;')})"
+            class="z-40 rounded-md bg-main-text-color p-2 text-white shadow transition-all hover:ring-2 hover:ring-main-text-color hover:ring-offset-2 hover:ring-offset-main-text-color focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-text-color group-hover:-translate-y-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-square-pen"
+            >
+              <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+              <path d="M18.375 2.625a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4Z" />
+            </svg>
+          </button>
+        </div>
       </div>
-    </div>
-  `;
-});
-}
-// when userPets are null or undefined we put code in a different div
-if (userPets == null || userPets == undefined) {
-  notCards.innerHTML = nullUndefinedHTMLMessage.join('');
-}
-else {
-  // Insert the cards into the card grid
-  cardGrid.innerHTML = cards.join('');
-}
+    `;
+  });
+  }
+  // when userPets are null or undefined we put code in a different div
+  if (userPets == null || userPets == undefined) {
+    notCards.innerHTML = nullUndefinedHTMLMessage.join('');
+  }
+  else {
+    // Insert the cards into the card grid
+    cardGrid.innerHTML = cards.join('');
+  }
+  
+  });
+} 
 
-});
+// displays pets on page load
+displayPets(user);
 
 if (user) {
   // swaps sign in button with sign out button
@@ -306,6 +309,8 @@ async function addPet(pet) {
       // success in terms of reaching the API
       console.log('Pet Added Successfully:', data);
       hideModal();
+      // updates pet list after we add new pet
+      displayPets(user);
     }
   } catch (error) {
     // Server fails to connect or send data
@@ -338,6 +343,8 @@ async function editPet(pet) {
       // success in terms of reaching the API
       console.log('Pet Updated Successfully:', data);
       hideModal();
+      // updates pets list after we edit
+      displayPets(user);
     }
   } catch (error) {
     // Server fails to connect or send data
@@ -369,6 +376,8 @@ async function deletePet(petId) {
       // success in terms of reaching the API
       console.log('Pet deleted successfully. Deleted Pet ID:', data.deleted_pet_id);
       hideModal();
+      // updates pet list after we delete
+      displayPets(user);
     }
     // error when reaching server or other things
   } catch (error) {
