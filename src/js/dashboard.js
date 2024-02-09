@@ -1,6 +1,10 @@
 // Grab the user from local storage
 const user = JSON.parse(localStorage.getItem('user'));
 
+// used for sign in and out buttons
+const signInLink = document.querySelector('#sign-in-link');
+const signOutButton = document.querySelector('#sign-out-button');
+
 // If the user is not logged in, redirect to the sign-in page
 //if (!user) {
 //window.location.href = '/sign-in';
@@ -230,9 +234,6 @@ const cards = dummyPets.map((dummyPet) => {
 
 // Insert the cards into the card grid
 cardGrid.innerHTML = cards.join('');
-
-const signInLink = document.querySelector('#sign-in-link');
-const signOutButton = document.querySelector('#sign-out-button');
 
 if (user) {
   // swaps sign in button with sign out button
@@ -572,8 +573,7 @@ searchInput.addEventListener(
   }, 500),
 );
 
-
-// signs user out
+// signs user out when clicked sign out button
 signOutButton.addEventListener('click', () => {
   localStorage.removeItem('user');
   window.location.href = '/sign-in';
