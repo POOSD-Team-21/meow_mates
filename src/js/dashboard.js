@@ -13,63 +13,44 @@ const signOutButton = document.querySelector('#sign-out-button');
 // Allows html to be formatted with Prettier
 const html = String.raw;
 
+// api get pet call 
+async function getPets(userId)
+{
+  try {
+    // calls the generate pet api
+    const response = await fetch('/api/generate-pet.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // sends user id to the php call to get the right pets from user
+      body: JSON.stringify({ id: userId }),
+    });
+
+    // waits for response from server
+    const data = await response.json();
+
+    // Check for errors or success
+    if (data.error) {
+      // triggers when connected, but server gives error
+      console.error('Error Getting Pets:', data.error);
+    } else {
+      // success in terms of reaching the API
+      console.log('Pets Obtained Successfully.');
+      hideModal();
+    }
+    // error when reaching server or other things
+  } catch (error) {
+    console.error('Error during getPets function:', error);
+  }
+
+  // otherwise we return the data
+  return data;
+}
+
 // NOTE: Do not use comments in the html template literals
 
 /* Modal code */
-
-// Dummy pet data (to be replaced with real data)
-const dummyPets = [
-  {
-    id: 1,
-    firstName: 'John',
-    lastName: 'Doe',
-    type: 'cat',
-    caretakerFirstName: 'Caleb',
-    caretakerLastName: 'Rivera',
-    caretakerEmail: 'calebrossr@gmail.com',
-    caretakerPhone: '2392934504',
-  },
-  {
-    id: 2,
-    firstName: 'John',
-    lastName: 'Doe',
-    type: 'dog',
-    caretakerFirstName: 'Caleb',
-    caretakerLastName: 'Rivera',
-    caretakerEmail: 'calebrossr@gmail.com',
-    caretakerPhone: '2392934504',
-  },
-  {
-    id: 3,
-    firstName: 'John',
-    lastName: 'Doe',
-    type: 'dog',
-    caretakerFirstName: 'Caleb',
-    caretakerLastName: 'Rivera',
-    caretakerEmail: 'calebrossr@gmail.com',
-    caretakerPhone: '2392934504',
-  },
-  {
-    id: 4,
-    firstName: 'John',
-    lastName: 'Doe',
-    type: 'dog',
-    caretakerFirstName: 'Caleb',
-    caretakerLastName: 'Rivera',
-    caretakerEmail: 'calebrossr@gmail.com',
-    caretakerPhone: '2392934504',
-  },
-  {
-    id: 5,
-    firstName: 'John',
-    lastName: 'Doe',
-    type: 'dog',
-    caretakerFirstName: 'Caleb',
-    caretakerLastName: 'Rivera',
-    caretakerEmail: 'calebrossr@gmail.com',
-    caretakerPhone: '2392934504',
-  },
-];
 
 function flip(card) {
   // First child is the inner card element we want to animate flipping
@@ -85,8 +66,11 @@ function flip(card) {
 // Grab the card grid where we will display the pet cards
 const cardGrid = document.querySelector('#card-grid');
 
+// calls getPets to get the list of pets with user info
+userPets = getPets(user);
+
 // For each pet, create a card
-const cards = dummyPets.map((dummyPet) => {
+const cards = listOfPets.map((userPets) => {
   // sets image to what type of animal it is
   let imageSrc;
 
@@ -273,15 +257,15 @@ async function addPet(pet) {
     // Check for errors or success
     if (data.error) {
       // triggers when connected, but server gives error
-      console.error('Error deleting pet:', data.error);
+      console.error('Error Adding Pet:', data.error);
     } else {
       // success in terms of reaching the API
-      console.log('Pet added successfully:', result);
+      console.log('Pet Added Successfully:', result);
       hideModal();
     }
   } catch (error) {
     // Server fails to connect or send data
-    console.error('Error adding pet:', error.message);
+    console.error('Error Adding Pet:', error.message);
   }
 }
 
@@ -305,15 +289,15 @@ async function editPet(pet) {
     // Check for errors or success
     if (data.error) {
       // triggers when connected, but server gives error
-      console.error('Error deleting pet:', data.error);
+      console.error('Error Editing Pet:', data.error);
     } else {
       // success in terms of reaching the API
-      console.log('Pet added successfully:', data);
+      console.log('Pet Updated Successfully:', data);
       hideModal();
     }
   } catch (error) {
     // Server fails to connect or send data
-    console.error('Error adding pet:', error.message);
+    console.error('Error Updating Pet:', error.message);
   }
 }
 
