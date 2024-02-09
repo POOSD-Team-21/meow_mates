@@ -6,9 +6,9 @@ const signInLink = document.querySelector('#sign-in-link');
 const signOutButton = document.querySelector('#sign-out-button');
 
 // If the user is not logged in, redirect to the sign-in page
-//if (!user) {
-//window.location.href = '/sign-in';
-//}
+if (!user) {
+  window.location.href = '/sign-in';
+}
 
 // Allows html to be formatted with Prettier
 const html = String.raw;
