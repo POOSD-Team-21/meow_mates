@@ -35,7 +35,7 @@ signInForm.addEventListener('submit', async (e) => {
   );
 
   // Redirect to the home landing page
-  window.location.href = '/home.html';
+  window.location.href = '/dashboard.html';
 });
 
 // TODO: implement
