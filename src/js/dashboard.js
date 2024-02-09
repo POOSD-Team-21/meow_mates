@@ -300,7 +300,7 @@ async function editPet(pet) {
       body: JSON.stringify(pet),
     });
 
-    const result = await response.json();
+    const data = await response.json();
 
     // Check for errors or success
     if (data.error) {
@@ -308,7 +308,7 @@ async function editPet(pet) {
       console.error('Error deleting pet:', data.error);
     } else {
       // success in terms of reaching the API
-      console.log('Pet added successfully:', result);
+      console.log('Pet added successfully:', data);
       hideModal();
     }
   } catch (error) {
