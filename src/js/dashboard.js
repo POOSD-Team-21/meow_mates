@@ -14,48 +14,103 @@ if (!user) {
 const html = String.raw;
 
 // api get pet call
-async function getPets() {
-  try {
-    let id = JSON.parse(localStorage.getItem('user')).id;
-    let payload = { userid: id };
+async function getPets(user, search) {
 
-    // calls the generate pet api
-    const response = await fetch('/api/generate-pet.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // sends user id to the php call to get the right pets from user
-      body: JSON.stringify(payload),
-    });
-
-    // waits for response from server
-    const data = await response.json();
-
-    // Check for errors or success
-    if (data.error) {
-      // triggers when connected, but server gives error
-      console.error('Error Getting Pets:', data.error);
-      if (data.error.trim === 'No results found.') {
-        // returns null since no results found
-        return null;
+  // if our search term is undefined then we are
+  if (search === undefined) {
+    try {
+      let id = JSON.parse(localStorage.getItem('user')).id;
+      let payload = { userid: id };
+  
+      // calls the generate pet api
+      const response = await fetch('/api/generate-pet.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // sends user id to the php call to get the right pets from user
+        body: JSON.stringify(payload),
+      });
+  
+      // waits for response from server
+      const data = await response.json();
+  
+      // Check for errors or success
+      if (data.error) {
+        // triggers when connected, but server gives error
+        console.error('Error Getting Pets:', data.error);
+        if (data.error.trim === 'No results found.') {
+          // returns null since no results found
+          return null;
+        } else {
+          // returns undefined when an error occurred
+          return undefined;
+        }
       } else {
-        // returns undefined when an error occurred
-        return undefined;
+        // success in terms of reaching the API
+        console.log('Pets Obtained Successfully.');
       }
-    } else {
-      // success in terms of reaching the API
-      console.log('Pets Obtained Successfully.');
+  
+      // otherwise we return the data
+      return data;
+  
+      // error when reaching server or other things
+    } catch (error) {
+      console.error('Error during getPets function:', error);
+      return undefined;
     }
-
-    // otherwise we return the data
-    return data;
-
-    // error when reaching server or other things
-  } catch (error) {
-    console.error('Error during getPets function:', error);
-    return undefined;
   }
+
+  // otherwise we are doing a search request
+  else {
+    try {
+      let id = JSON.parse(localStorage.getItem('user')).id;
+      
+      let payload = { 
+        userid: id,
+        "search-pets-input": search
+      };
+  
+      // calls the search pet api
+      const response = await fetch('/api/search-pet.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        // sends user id to the php call to get the right pets from user
+        body: JSON.stringify(payload),
+      });
+  
+      // waits for response from server
+      const data = await response.json();
+  
+      // Check for errors or success
+      if (data.error) {
+        // triggers when connected, but server gives error
+        console.error('Error Searching For Pets:', data.error);
+        if (data.error.trim === 'No results found.') {
+          // returns null since no results found
+          return null;
+        } else {
+          // returns undefined when an error occurred
+          return undefined;
+        }
+      } else {
+        // success in terms of reaching the API
+        console.log('Pets Found Successfully.');
+      }
+  
+      // otherwise we return the data
+      return data;
+  
+      // error when reaching server or other things
+    } catch (error) {
+      console.error('Error during search function:', error);
+      return undefined;
+    }
+  }
+
+  
 }
 
 // NOTE: Do not use comments in the html template literals
@@ -78,9 +133,10 @@ const cardGrid = document.querySelector('#card-grid');
 const notCards = document.querySelector('#not-cards');
 
 // gets pets from gets pets call and displays each card
-function displayPets(user) {
+// if pass in undefined, then we are not searching anything (just getting pets)
+function displayPets(user, search) {
   // calls getPets to get the list of pets with user info
-  getPets(user).then((userPets) => {
+  getPets(user, search).then((userPets) => {
     // holds the cards created by the pet
     let cards;
     let nullUndefinedHTMLMessage;
@@ -271,7 +327,7 @@ function displayPets(user) {
 }
 
 // displays pets on page load
-displayPets(user);
+displayPets(user, undefined);
 
 if (user) {
   // swaps sign in button with sign out button
@@ -317,7 +373,7 @@ async function addPet(pet) {
       console.log('Pet Added Successfully:', data);
       hideModal();
       // updates pet list after we add new pet
-      displayPets(user);
+      displayPets(user, undefined);
     }
   } catch (error) {
     // Server fails to connect or send data
@@ -351,7 +407,7 @@ async function editPet(pet) {
       console.log('Pet Updated Successfully:', data);
       hideModal();
       // updates pets list after we edit
-      displayPets(user);
+      displayPets(user, undefined);
     }
   } catch (error) {
     // Server fails to connect or send data
@@ -384,7 +440,7 @@ async function deletePet(petId) {
       console.log('Pet deleted successfully. Deleted Pet ID:', data.deleted_pet_id);
       hideModal();
       // updates pet list after we delete
-      displayPets(user);
+      displayPets(user, undefined);
     }
     // error when reaching server or other things
   } catch (error) {
@@ -614,8 +670,9 @@ const debounce = (callback, wait) => {
 searchInput.addEventListener(
   'input',
   debounce((event) => {
-    const searchTerm = event.target.value;
-    // TODO: implement search
+    let searchTerm = event.target.value;
+    // puts search term into value to search for
+    displayPets(user, searchTerm);  
   }, 500),
 );
 
