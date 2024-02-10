@@ -92,7 +92,7 @@ function displayPets(user) {
           <img
             src="/assets/MeowMatesCenteredBlueBackground.png"
             alt="Dog and Cat with words MeowMates in front with blue background"
-            class="h-32 w-32"
+            class="h-96 w-96 object-contain"
           />
         `,
       ];
@@ -252,10 +252,20 @@ function displayPets(user) {
     }
     // when userPets are null or undefined we put code in a different div
     if (userPets == null || userPets == undefined) {
+      // adds html for the notCards area and displays it
+      notCards.style.visibility  = 'visible';
       notCards.innerHTML = nullUndefinedHTMLMessage.join('');
+      
+      // hides card grid (as there are technically none)
+      // used to get rid of lingering cached cards
+      cardGrid.style.visibility  ='hidden';
     } else {
       // Insert the cards into the card grid
       cardGrid.innerHTML = cards.join('');
+      cardGrid.style.visibility  = 'visible';
+
+      // hides image since if there are cards then should not be displayed
+      notCards.style.visibility  = 'hidden';
     }
   });
 }
