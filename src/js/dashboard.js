@@ -569,7 +569,7 @@ function showModal(purpose, data) {
           ${purpose === 'edit' ? `value="${data.caretakerPhone}"` : ''}
         />
         <button
-          class="mt-2 rounded-md bg-main-text-color px-4 py-2 font-semibold text-white shadow-md outline-none transition duration-300 hover:bg-main-text-color/90 focus:ring-2 focus:ring-main-text-color focus:ring-offset-2"
+          class="mt-2 rounded-md bg-main-text-color px-4 py-2 font-semibold text-white shadow-md outline-none transition duration-300 hover:underline hover:ring-2 hover:ring-main-text-color hover:ring-offset-2 hover:ring-offset-main-background-color focus:underline focus:outline-main-background-color focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
           type="submit"
         >
         ${purpose === 'add'
