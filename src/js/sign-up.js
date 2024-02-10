@@ -37,8 +37,8 @@ async function signUpUser(user) {
 
 // when loading page, need to check if length is less then 767 pixels
 // if so, then we need to add a button to get back to home
-window.onload = function() {
-  const homeLink = document.querySelector('#homeLink')
+window.onload = function () {
+  const homeLink = document.querySelector('#homeLink');
   // checks if window size is less then 767 pixels
   if (window.innerWidth <= 767) {
     homeLink.style.display = 'block';
@@ -46,11 +46,11 @@ window.onload = function() {
     // otherwise hides it
     homeLink.style.display = 'none';
   }
-}
+};
 
 // when resizing we do the same thing in case it is resized to less then 767
-window.addEventListener('resize', function() {
-  const homeLink = document.querySelector('#homeLink')
+window.addEventListener('resize', function () {
+  const homeLink = document.querySelector('#homeLink');
   // checks if window size is less then 767 pixels
   if (window.innerWidth <= 767) {
     homeLink.style.display = 'block';

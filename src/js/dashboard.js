@@ -15,13 +15,12 @@ const html = String.raw;
 
 // api get pet call
 async function getPets(user, search) {
-
   // if our search term is undefined then we are
   if (search === undefined) {
     try {
       let id = JSON.parse(localStorage.getItem('user')).id;
       let payload = { userid: id };
-  
+
       // calls the generate pet api
       const response = await fetch('/api/generate-pet.php', {
         method: 'POST',
@@ -31,10 +30,10 @@ async function getPets(user, search) {
         // sends user id to the php call to get the right pets from user
         body: JSON.stringify(payload),
       });
-  
+
       // waits for response from server
       const data = await response.json();
-  
+
       // Check for errors or success
       if (data.error) {
         // triggers when connected, but server gives error
@@ -50,10 +49,10 @@ async function getPets(user, search) {
         // success in terms of reaching the API
         console.log('Pets Obtained Successfully.');
       }
-  
+
       // otherwise we return the data
       return data;
-  
+
       // error when reaching server or other things
     } catch (error) {
       console.error('Error during getPets function:', error);
@@ -65,12 +64,12 @@ async function getPets(user, search) {
   else {
     try {
       let id = JSON.parse(localStorage.getItem('user')).id;
-      
-      let payload = { 
+
+      let payload = {
         userid: id,
-        "search-pets-input": search
+        'search-pets-input': search,
       };
-  
+
       // calls the search pet api
       const response = await fetch('/api/search-pet.php', {
         method: 'POST',
@@ -80,10 +79,10 @@ async function getPets(user, search) {
         // sends user id to the php call to get the right pets from user
         body: JSON.stringify(payload),
       });
-  
+
       // waits for response from server
       const data = await response.json();
-  
+
       // Check for errors or success
       if (data.error) {
         // triggers when connected, but server gives error
@@ -99,18 +98,16 @@ async function getPets(user, search) {
         // success in terms of reaching the API
         console.log('Pets Found Successfully.');
       }
-  
+
       // otherwise we return the data
       return data;
-  
+
       // error when reaching server or other things
     } catch (error) {
       console.error('Error during search function:', error);
       return undefined;
     }
   }
-
-  
 }
 
 // NOTE: Do not use comments in the html template literals
@@ -309,19 +306,19 @@ function displayPets(user, search) {
     // when userPets are null or undefined we put code in a different div
     if (userPets == null || userPets == undefined) {
       // adds html for the notCards area and displays it
-      notCards.style.visibility  = 'visible';
+      notCards.style.visibility = 'visible';
       notCards.innerHTML = nullUndefinedHTMLMessage.join('');
-      
+
       // hides card grid (as there are technically none)
       // used to get rid of lingering cached cards
-      cardGrid.style.visibility  ='hidden';
+      cardGrid.style.visibility = 'hidden';
     } else {
       // Insert the cards into the card grid
       cardGrid.innerHTML = cards.join('');
-      cardGrid.style.visibility  = 'visible';
+      cardGrid.style.visibility = 'visible';
 
       // hides image since if there are cards then should not be displayed
-      notCards.style.visibility  = 'hidden';
+      notCards.style.visibility = 'hidden';
     }
   });
 }
@@ -572,9 +569,7 @@ function showModal(purpose, data) {
           class="mt-2 rounded-md bg-main-text-color px-4 py-2 font-semibold text-white shadow-md outline-none transition duration-300 hover:underline hover:ring-2 hover:ring-main-text-color hover:ring-offset-2 hover:ring-offset-main-background-color focus:underline focus:outline-main-background-color focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-main-background-color"
           type="submit"
         >
-        ${purpose === 'add'
-        ? `Add Pet`
-        : `Update Pet`}
+          ${purpose === 'add' ? `Add Pet` : `Update Pet`}
         </button>
       </form>
     `;
@@ -672,7 +667,7 @@ searchInput.addEventListener(
   debounce((event) => {
     let searchTerm = event.target.value;
     // puts search term into value to search for
-    displayPets(user, searchTerm);  
+    displayPets(user, searchTerm);
   }, 500),
 );
 
