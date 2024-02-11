@@ -24,7 +24,7 @@ if ($connection->connect_error) {
     exit;
 }
 
-$query = "SELECT INTNUM id, FIRST firstName, LAST lastName, TYPE type, CARETAKER_FIRST caretakerFirstName, CARETAKER_LAST caretakerLastName, EMAIL caretakerEmail, PHONE caretakerPhone FROM PETS WHERE USERID = ?";
+$query = "SELECT INTNUM id, FIRST firstName, LAST lastName, TYPE type, CARETAKER_FIRST caretakerFirstName, CARETAKER_LAST caretakerLastName, EMAIL caretakerEmail, PHONE caretakerPhone, CREATED dateCreated FROM PETS WHERE USERID = ?";
 
 $statement = $connection->prepare($query);
 

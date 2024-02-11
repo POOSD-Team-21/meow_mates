@@ -30,7 +30,7 @@ if ($connection->connect_error) {
 $query = "SELECT INTNUM id, FIRST firstName, LAST lastName,
 	TYPE type, CARETAKER_FIRST caretakerFirstName,
 	CARETAKER_LAST caretakerLastName, EMAIL caretakerEmail,
-	PHONE caretakerPhone FROM PETS
+	PHONE caretakerPhone, CREATED dateCreated FROM PETS
 	WHERE USERID = ? AND (FIRST LIKE ? OR LAST LIKE ?)";
 
 $statement = $connection->prepare($query);
