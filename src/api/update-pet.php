@@ -1,5 +1,4 @@
 <?php
-
 loadEnv(__DIR__.'/../.env');
 
 $host = $_ENV['DB_HOST'];
@@ -8,34 +7,47 @@ $user = $_ENV['DB_USERNAME'];
 $dbPassword = $_ENV['DB_PASSWORD'];
 
 $inData = getRequestInfo();
+error_log(json_encode($inData)); // Log the input data
 
-$intnum = $inData['id'];
-$type = $inData['type']; // Add fields for all the properties you want to update
-$first = $inData['first'];
-$last = $inData['last'];
-$caretakerId = $inData['caretaker_id'];
-$age = $inData['age'];
-$descr = $inData['descr'];
+$intnum = $inData['id'] ?? '';
+$type = $inData['petType'] ?? ''; 
+$first = $inData['petFirst'] ?? ''; 
+$last = $inData['petLast'] ?? ''; 
+$caretakerFirstName = $inData['caretakerFirst'] ?? ''; 
+$caretakerLastName = $inData['caretakerLast'] ?? ''; 
+$caretakerEmail = $inData['caretakerEmail'] ?? '';
+$caretakerPhone = $inData['caretakerPhone'] ?? ''; 
+
+// Check if required fields are provided
+if (empty($intnum) || empty($type) || empty($first) || empty($last) || empty($caretakerFirstName) || empty($caretakerLastName) || empty($caretakerEmail) || empty($caretakerPhone)) {
+    returnWithError('Missing required fields.');
+    exit();
+}
 
 $conn = new mysqli($host, $user, $dbPassword, $database);
 
 if ($conn->connect_error) {
     returnWithError($conn->connect_error);
 } else {
-    $query = "UPDATE PETS SET TYPE=?, FIRST=?, LAST=?, AGE=?, DESCR=? WHERE INTNUM = ?";
+    $query = "UPDATE PETS SET TYPE=?, FIRST=?, LAST=?, CARETAKER_FIRST=?, CARETAKER_LAST=?, EMAIL=?, PHONE=? WHERE INTNUM = ?";
     $stmt = $conn->prepare($query);
     
     if ($stmt) {
-        $stmt->bind_param('sssiiss', $type, $first, $last, $caretakerId, $age, $descr, $intnum);
-        $stmt->execute();
+        // Adjusted binding types
+        $stmt->bind_param('ssssssii', $type, $first, $last, $caretakerFirstName, $caretakerLastName, $caretakerEmail, $caretakerPhone, $intnum);
+        
+        if ($stmt->execute()) {
+            returnWithSuccess();
+        } else {
+            returnWithError("Error executing update statement: " . $stmt->error);
+        }
         
         $stmt->close();
-        $conn->close();
-        
-        returnWithSuccess();
     } else {
         returnWithError("Update statement preparation error: " . $conn->error);
     }
+    
+    $conn->close();
 }
 
 function getRequestInfo()
