@@ -176,7 +176,7 @@ function displayPets(user, search) {
 
           // for birds
           case 'Bird':
-            imageSrc = 'path/to/bird-image.jpg';
+            imageSrc = '/assets/pet_images/bird.jpg';
             altText = 'Image of a colorful parrot, representing bird pets';
             break;
 
