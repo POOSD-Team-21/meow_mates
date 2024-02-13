@@ -513,7 +513,7 @@ function showModal(purpose, data) {
           name="petType"
           class="rounded-md border border-main-text-color px-4 py-2 shadow-md transition placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-main-text-color focus:ring-offset-2 focus:ring-offset-white"
         >
-          ${['dog', 'cat', 'bird', 'fish', 'reptile', 'shark', 'other'].map(
+          ${['Dog', 'Cat', 'Bird', 'Fish', 'Reptile', 'Shark', 'Other'].map(
             (type) => html`
               <option value="${type}" ${purpose === 'edit' && data.type === type ? 'selected' : ''}>
                 ${type.charAt(0).toUpperCase() + type.slice(1)}
