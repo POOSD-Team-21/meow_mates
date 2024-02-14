@@ -163,37 +163,37 @@ function displayPets(user, search) {
         // for each image, based on type uses the correct image for it
         switch (userPet.type) {
           // for dogs
-          case 'Dog':
+          case 'dog':
             imageSrc = '/assets/pet_images/dog.jpg';
             altText = 'Image of a dog representing dog pets';
             break;
 
           // for cats
-          case 'Cat':
+          case 'cat':
             imageSrc = '/assets/pet_images/cat.jpg';
             altText = 'Image of standard issue cat, representing cat pets';
             break;
 
           // for birds
-          case 'Bird':
+          case 'bird':
             imageSrc = '/assets/pet_images/bird.jpg';
             altText = 'Image of a colorful parrot, representing bird pets';
             break;
 
           // for sharks
-          case 'Shark':
+          case 'shark':
             imageSrc = '/assets/pet_images/shark.jpg';
             altText = 'Image of a shark, representing shark pets';
             break;
 
           // for fish
-          case 'Fish':
+          case 'fish':
             imageSrc = '/assets/pet_images/fish.jpg';
             altText = 'Image of a gold fish, representing fish pets';
             break;
 
           // for reptiles
-          case 'Reptile':
+          case 'reptile':
             imageSrc = '/assets/pet_images/reptile.jpg';
             altText = 'Image of a snake representing reptile pets';
             break;
